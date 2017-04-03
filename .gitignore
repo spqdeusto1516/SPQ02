@@ -1,8 +1,27 @@
-# Eclipse
-.classpath
-.project
-.settings/
+
+#Eclipse files
+**/.project
+**/.classpath
+**/.settings/
+blog/bin/
+**/.tern-project
+
+# Package Files #
+*.jar
+*.war
+*.ear
 
 # Maven
 log/
 target/
+
+## File-based project format
+*.ipr
+*.iws
+*.iml
+
+.springBeans
+/mvnw.bat
+/mvn.cmd
+/mvnw
+/.mvn/
