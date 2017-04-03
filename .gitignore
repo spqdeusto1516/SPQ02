@@ -25,4 +25,5 @@ target/
 /mvnw.bat
 /mvn.cmd
 /mvnw
+/mvnw.cmd
 /.mvn/
