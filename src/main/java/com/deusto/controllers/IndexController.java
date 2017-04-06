@@ -1,6 +1,8 @@
 package com.deusto.controllers;
 
+import org.mongeez.Mongeez;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mongodb.Mongo;
 import com.deusto.model.Book;
 import com.deusto.repository.BookRepository;
 
@@ -22,14 +25,16 @@ public class IndexController {
 	BookRepository bRepository;
 	
 	@PostMapping(path = "/")
-	public ModelAndView post(@ModelAttribute Book book, Model model){
-		bRepository.insert(book);
+	public ModelAndView post(@ModelAttribute Book book, Model model){    	
+    	bRepository.insert(book);
 		model.addAttribute("content", bRepository.findAll());
 		return new ModelAndView("list");
 	}
 	
     @GetMapping(path = "/")
     public ModelAndView index(Model model) {
+    	
+    	
     	Book bok = new Book();
     	bok.setTitle("not use this");
     	bok.setAuthorFirstName("not use this");
