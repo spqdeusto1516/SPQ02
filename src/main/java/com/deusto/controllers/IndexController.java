@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mongodb.Mongo;
@@ -24,26 +25,21 @@ public class IndexController {
 	@Autowired
 	BookRepository bRepository;
 	
-	@PostMapping(path = "/")
-	public ModelAndView post(@ModelAttribute Book book, Model model){    	
-    	bRepository.insert(book);
-		model.addAttribute("content", bRepository.findAll());
-		return new ModelAndView("list");
+	@PostMapping(path = "/", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public HttpEntity<?> post(@RequestBody Book book){    	
+		return new ResponseEntity(bRepository.insert(book),HttpStatus.OK);
 	}
 	
-    @GetMapping(path = "/")
-    public ModelAndView index(Model model) {
-    	
-    	
+    @GetMapping(path = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    public HttpEntity<?> json(){
+    	return new ResponseEntity(bRepository.findByTitle("not use this"),HttpStatus.OK);
+    }
+    
+    @GetMapping(path = "/insertFake")
+    public HttpEntity<?> index() {
     	Book bok = new Book();
     	bok.setTitle("not use this");
     	bok.setAuthorFirstName("not use this");
-    	bRepository.insert(bok);
-        return new ModelAndView("index","book", new Book());
-    }
-    
-    @GetMapping(path = "/json", produces = MediaType.APPLICATION_JSON_VALUE)
-    public HttpEntity<?> json(){
-    	return new ResponseEntity(bRepository.findByTitle("not use this"),HttpStatus.OK);
+        return new ResponseEntity(bRepository.insert(bok),HttpStatus.OK);
     }
 }
