@@ -32,7 +32,7 @@ public class IndexController {
 	
     @GetMapping(path = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<?> json(){
-    	return new ResponseEntity(bRepository.findByTitle("not use this"),HttpStatus.OK);
+    	return new ResponseEntity(bRepository.findAll(),HttpStatus.OK);
     }
     
     @GetMapping(path = "/insertFake")
