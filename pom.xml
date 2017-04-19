@@ -6,7 +6,7 @@
 	<groupId>bookit</groupId>
 	<artifactId>SPQ02</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
 
 	<name>SPQ02</name>
 	<description>Demo project for Spring Boot</description>
@@ -177,7 +177,7 @@
 						<artifactId>exec-maven-plugin</artifactId>
 						<version>1.6.0</version>
 						<configuration>
-							<mainClass>com.deusto.client.Client</mainClass>
+							<mainClass>Client.org.Client.Client</mainClass>
 							<systemProperties>
 								<systemProperty>
 									<key>java.security.manager</key>
@@ -203,4 +203,8 @@
 			</build>
 		</profile>
 	</profiles>
+	<modules>
+		<module>Server</module>
+		<module>Client</module>
+	</modules>
 </project>
