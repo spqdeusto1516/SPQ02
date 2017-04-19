@@ -131,80 +131,17 @@
 
 
 	<url>http://maven.apache.org</url>
-	<profiles> 
-		<!-- run as 'mvn exec:java -Pserver' -->
-		<profile>  
-			<id>server</id>  
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>exec-maven-plugin</artifactId>
-						<version>1.6.0</version>
-						<configuration>
-							<mainClass>com.deusto.server.Server</mainClass>
-							<systemProperties>
-								<systemProperty>
-									<key>java.security.manager</key>
-									<value>java.rmi.RMISecurityManager</value>
-								</systemProperty>
-								<systemProperty>
-									<key>java.rmi.server.codebase</key>
-									<value>file:${basedir}/target/classes/</value>
-								</systemProperty>
-								<systemProperty>
-									<key>java.security.policy</key>
-									<value>${policy.file}</value>
-								</systemProperty>
-							</systemProperties>
-							<arguments>  
-								<argument>${server.IP}</argument>  
-								<argument>${server.port}</argument>  
-								<argument>${server.Name}</argument>  
-							</arguments>  
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		
-		<profile>  
-			<id>client</id>  
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>exec-maven-plugin</artifactId>
-						<version>1.6.0</version>
-						<configuration>
-							<mainClass>Client.org.Client.Client</mainClass>
-							<systemProperties>
-								<systemProperty>
-									<key>java.security.manager</key>
-									<value>java.rmi.RMISecurityManager</value>
-								</systemProperty>
-								<systemProperty>
-									<key>java.rmi.server.codebase</key>
-									<value>file:${basedir}/target/classes/</value>
-								</systemProperty>
-								<systemProperty>
-									<key>java.security.policy</key>
-									<value>${policy.file}</value>
-								</systemProperty>
-							</systemProperties>
-							<arguments>  
-								<argument>${server.IP}</argument>  
-								<argument>${server.port}</argument>  
-								<argument>${server.Name}</argument>  
-							</arguments>  
-						</configuration>    
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
 	<modules>
 		<module>Server</module>
 		<module>Client</module>
 	</modules>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>bookit</groupId>
+				<artifactId>Server</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 </project>
