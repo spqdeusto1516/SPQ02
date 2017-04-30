@@ -1,0 +1,10 @@
+com\deusto\model\Registr.class
+com\deusto\model\Reserve.class
+com\deusto\model\User.class
+com\deusto\model\Book.class
+com\deusto\controllers\IndexController.class
+com\deusto\builders\BookBuilder.class
+com\deusto\SwaggerConfigs.class
+com\deusto\model\Address.class
+com\deusto\repository\BookRepository.class
+com\deusto\BookitApplication.class
