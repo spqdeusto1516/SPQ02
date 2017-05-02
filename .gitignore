@@ -1,33 +1,20 @@
 #Eclipse files
 *.project
 *.classpath
+ClientB/*.classpath
+ClientB/*.project
+ClientB/target/
+ClientB/.settings/
+ServerB/*.classpath
+ServerB/*.project
+ServerB/target/
+ServerB/.settings/
+.settings/
 
 # Package Files 
 *.jar
 *.war
 *.ear
 
-<<<<<<< HEAD
-# Maven
-log/
-ServerB/target/
-ClientB/target/
-
-## File-based project format
-*.ipr
-*.iws
-*.iml
-
-.springBeans
-/mvnw.bat
-/mvn.cmd
-/mvnw
-/mvnw.cmd
-/.mvn/
-
-*.cmd
-
-=======
 # Documentation Files
 *.pdf
->>>>>>> branch 'master' of https://github.com/spqdeusto1617/SPQ02.git
