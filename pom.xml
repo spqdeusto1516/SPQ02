@@ -23,8 +23,36 @@
 		<config.files.dir>${basedir}/src/main/resources</config.files.dir>
 	</properties>
 
-  <dependencies>
+	
+  <dependencyManagement>
+  	<dependencies>
+  		<dependency>
+  			<groupId>prueba</groupId>
+  			<artifactId>ServerB</artifactId>
+  			<version>0.0.1-SNAPSHOT</version>
+  		</dependency>
+  	</dependencies>
+ </dependencyManagement>
+ <dependencies>
+  		<dependency>
+		    <groupId>io.github.hzpz.spring.boot</groupId>
+		    <artifactId>mongeez-spring-boot-starter</artifactId>
+		    <version>${spring-boot-mongeez.version}</version>
+		</dependency>
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-mongodb</artifactId>
+		</dependency>
+		 <dependency>
+	        <groupId>javax.servlet</groupId>
+	        <artifactId>jstl</artifactId>
+	    </dependency>
+        <dependency>
+            <groupId>com.jayway.jsonpath</groupId>
+            <artifactId>json-path</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
 		    <groupId>io.springfox</groupId>
 		    <artifactId>springfox-swagger2</artifactId>
 		    <version>${swagger.version}</version>
@@ -34,19 +62,11 @@
 		    <artifactId>springfox-swagger-ui</artifactId>
 		    <version>${swagger.version}</version>
 		</dependency>
-		<dependency>
-		    <groupId>io.github.hzpz.spring.boot</groupId>
-		    <artifactId>mongeez-spring-boot-starter</artifactId>
-		    <version>${spring-boot-mongeez.version}</version>
-		</dependency>
+		
 		<dependency>
 		    <groupId>it.ozimov</groupId>
 		    <artifactId>spring-boot-email-core</artifactId>
 		    <version>${emailservice.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -58,6 +78,10 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
@@ -67,26 +91,14 @@
 	        <artifactId>tomcat-embed-jasper</artifactId>
 	        <scope>provided</scope>
 	    </dependency>
-	    <dependency>
-	        <groupId>javax.servlet</groupId>
-	        <artifactId>jstl</artifactId>
-	    </dependency>
-	</dependencies>
-	
-  <dependencyManagement>
-  	<dependencies>
-  		<dependency>
-  			<groupId>prueba</groupId>
-  			<artifactId>ServerP</artifactId>
-  			<version>0.0.1-SNAPSHOT</version>
-  		</dependency>
   	</dependencies>
-  </dependencyManagement>
+
   <parent>
   	<groupId>org.springframework.boot</groupId>
   	<artifactId>spring-boot-starter-parent</artifactId>
   	<version>2.0.0.BUILD-SNAPSHOT</version>
   </parent>
+  
   <modules>
   	<module>ServerB</module>
   	<module>ClientB</module>

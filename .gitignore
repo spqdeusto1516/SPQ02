@@ -14,7 +14,8 @@ blog/bin/
 
 # Maven
 log/
-target/
+ServerB/target/
+ClientB/target/
 
 ## File-based project format
 *.ipr

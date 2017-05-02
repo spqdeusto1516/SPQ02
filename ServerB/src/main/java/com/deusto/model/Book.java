@@ -1,10 +1,11 @@
 package com.deusto.model;
 
 import java.util.List;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Document(collection="books")
 public class Book {
   @Id
@@ -94,4 +95,10 @@ public class Book {
 	public void setTags(List<String> tags) {
 		this.tags = tags;
 	}
+	public String toString() {
+        return "Quote{" +
+                "ID='" + id + '\'' +
+                ", Title =" + title +
+                '}';
+    }
 }

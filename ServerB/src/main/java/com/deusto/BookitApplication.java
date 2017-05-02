@@ -1,33 +1,71 @@
 package com.deusto;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
 
-@SpringBootApplication
+import com.deusto.model.Book;
+import com.deusto.repository.BookRepository;
+
 @EnableAutoConfiguration(exclude = {ErrorMvcAutoConfiguration.class})
+@SpringBootApplication
 public class BookitApplication implements CommandLineRunner {
-
 	
-	public static void main(String[] args) {
+	@Autowired
+	private BookRepository bRepository;
+	public List<Book> books;
+	
+	private static final Logger log = LoggerFactory.getLogger(BookitApplication.class);
+	
+	public void main(String[] args) {
 		SpringApplication.run(BookitApplication.class, args);
+
 	}
+	
+	
+	@Override
 	public void run(String... arg0) throws Exception {
-//		repository.deleteAll();
-//		Book book1 = new BookBuilder().build();
-//		book1.setTitle("LOTR");
-//		book1.setId("1234");
-//		repository.insert(book1);
+//		bRepository.deleteAll();
+//		Book book = new Book();
+//		book.setTitle("Hola");
+//		book.setId("5678c");
+//		bRepository.save(book);
 //		System.out.println("Books found with findAll():");
 //		System.out.println("-------------------------------");
-//		for (Book books : repository.findAll()) {
+		List<Book> books = bRepository.findAll();
+		this.books = books;
+		for (Book book : bRepository.findAll()) {
+			System.out.println(book.getTitle());
+		}
+	}
+	
+	public List<Book> getBooks(){
+		return this.books;
+	}
+	
+	public void printBook(int x){
+		System.out.println(books.get(x).toString());
+	}
+	
+//	public void getBooks(){
+//		for (Book books : bRepository.findAll()) {
 //			System.out.println(books.getTitle());
 //		}
-//		System.out.println();
-		
-	}
+//	}
+
 }

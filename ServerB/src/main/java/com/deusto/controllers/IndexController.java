@@ -41,4 +41,8 @@ public class IndexController {
     	bok.setAuthorFirstName("Tolkien");
         return new ResponseEntity(bRepository.insert(bok),HttpStatus.OK);
     }
+    @GetMapping(path = "/basic")
+    public HttpEntity<?> prueba(){
+    	return new ResponseEntity(bRepository.findAll(),HttpStatus.OK);
+    }
 }

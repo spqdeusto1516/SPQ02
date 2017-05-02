@@ -8,7 +8,7 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>ServerB</artifactId>
-  <name>ServerP</name>
+  <name>ServerB</name>
   <url>http://maven.apache.org</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -20,4 +20,20 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+ <profiles>
+		<profile>  
+			<id>serverB</id>
+			<build>
+	     		<plugins>
+	         		<plugin>
+	            		 <groupId>org.springframework.boot</groupId>
+	            		 <artifactId>spring-boot-maven-plugin</artifactId>
+	            		 <configuration>
+							<mainClass>com.deusto.BookitApplication</mainClass>
+						</configuration>
+	        		 </plugin>
+	     		</plugins>
+	 		</build>
+		 </profile>
+	</profiles>
 </project>

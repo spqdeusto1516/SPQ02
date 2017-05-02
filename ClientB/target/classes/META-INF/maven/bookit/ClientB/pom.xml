@@ -2,43 +2,65 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
+  
   <parent>
     <groupId>bookit</groupId>
     <artifactId>SPQ02</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
+  
   <artifactId>ClientB</artifactId>
-  <name>ClientP</name>
+  <name>ClientB</name>
   <url>http://maven.apache.org</url>
+  
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
+  
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <scope>test</scope>
     </dependency>
-    <dependency>
-    	<groupId>prueba</groupId>
-    	<artifactId>ServerP</artifactId>
-    </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <dependency>
+        	<groupId>bookit</groupId>
+        	<artifactId>ServerB</artifactId>
+        	<version>0.0.1-SNAPSHOT</version>
+        </dependency>
   </dependencies>
-   <profiles>
-		<profile>  
-			<id>client</id>  
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>exec-maven-plugin</artifactId>
-						<version>1.6.0</version>
-						<configuration>
-							<mainClass>org.ClientP.App</mainClass>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
+  
+      <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+  
+<!-- 	<profiles> -->
+<!-- 		<profile>   -->
+<!-- 			<id>clientB</id> -->
+<!-- 			 <build> -->
+<!--         		<plugins> -->
+<!--             		<plugin> -->
+<!--                 		<groupId>org.springframework.boot</groupId> -->
+<!--                 		<artifactId>spring-boot-maven-plugin</artifactId> -->
+<!--                 		<configuration> -->
+<!-- 							<mainClass>org.ClientP.App</mainClass> -->
+<!-- 						</configuration> -->
+<!--             		</plugin> -->
+<!--         		</plugins> -->
+<!--     		</build>   -->
+<!-- 		</profile> -->
+<!-- 	</profiles> -->
 </project>
