@@ -13,7 +13,6 @@ public class App
 	public static void main(String args[]) {
 		BookitApplication bookit = new BookitApplication();
 		bookit.main(args);
-		bookit.printBook(0);
 //		List<Book> books = bookit.getBooks();
 //		System.out.println(bookit.getBooks().get(0).toString());
 //		for(Book book: books){

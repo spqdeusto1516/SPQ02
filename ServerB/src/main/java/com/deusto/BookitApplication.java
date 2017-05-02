@@ -49,17 +49,10 @@ public class BookitApplication implements CommandLineRunner {
 //		System.out.println("-------------------------------");
 		List<Book> books = bRepository.findAll();
 		this.books = books;
+		System.out.println(this.books.get(0).toString());
 		for (Book book : bRepository.findAll()) {
 			System.out.println(book.getTitle());
 		}
-	}
-	
-	public List<Book> getBooks(){
-		return this.books;
-	}
-	
-	public void printBook(int x){
-		System.out.println(books.get(x).toString());
 	}
 	
 //	public void getBooks(){
