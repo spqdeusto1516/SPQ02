@@ -28,6 +28,21 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.2.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
@@ -44,11 +59,6 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <version>${spring-boot-mongeez.version}</version>
         </dependency>
         <dependency>
-            <groupId>it.ozimov</groupId>
-            <artifactId>spring-boot-email-core</artifactId>
-            <version>${emailservice.version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
@@ -59,7 +69,6 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -74,11 +83,6 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>2.6.1</version>
         </dependency>
     </dependencies>
 
