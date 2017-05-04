@@ -106,7 +106,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
         <dependency>
             <groupId>com.lordofthejars</groupId>
             <artifactId>nosqlunit-mongodb</artifactId>
-            <version>0.14.0</version>
+            <version>LATEST</version>
         </dependency>
     </dependencies>
 
