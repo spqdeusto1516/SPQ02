@@ -32,33 +32,13 @@ public class BookitApplication implements CommandLineRunner {
 	
 	private static final Logger log = LoggerFactory.getLogger(BookitApplication.class);
 	
-	public void main(String[] args) {
+	public static void main(String[] args) {
 		SpringApplication.run(BookitApplication.class, args);
 
 	}
-	
-	
+
+
 	@Override
-	public void run(String... arg0) throws Exception {
-//		bRepository.deleteAll();
-//		Book book = new Book();
-//		book.setTitle("Hola");
-//		book.setId("5678c");
-//		bRepository.save(book);
-//		System.out.println("Books found with findAll():");
-//		System.out.println("-------------------------------");
-		List<Book> books = bRepository.findAll();
-		this.books = books;
-		System.out.println(this.books.get(0).toString());
-		for (Book book : bRepository.findAll()) {
-			System.out.println(book.getTitle());
-		}
-	}
-	
-//	public void getBooks(){
-//		for (Book books : bRepository.findAll()) {
-//			System.out.println(books.getTitle());
-//		}
-//	}
+	public void run(String... arg0) throws Exception { }
 
 }
