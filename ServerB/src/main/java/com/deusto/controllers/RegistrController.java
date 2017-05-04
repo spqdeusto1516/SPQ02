@@ -2,11 +2,11 @@ package com.deusto.controllers;
 
 import com.deusto.builders.RegistrBuilder;
 import com.deusto.dtos.RegistrDTO;
-import com.deusto.forms.email.RegistrForm;
+import com.deusto.email.RegistrForm;
 import com.deusto.repositories.RegistrRepository;
 import com.deusto.repositories.UserRepository;
 import com.deusto.services.RegistrService;
-import com.deusto.services.mail.EmailService;
+import com.deusto.mail.EmailService;
 import com.google.common.collect.ImmutableMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -17,6 +17,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.validation.Valid;
 
 import static java.lang.String.format;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
@@ -43,7 +45,7 @@ public class RegistrController {
     private UserRepository userRepository;
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public HttpEntity<?> registr(@RequestBody RegistrDTO registrDTO) {
+    public HttpEntity<?> registr(@RequestBody @Valid RegistrDTO registrDTO) {
         //TODO avoid try catch block in controllers
         try {
             emailService.send(
@@ -54,6 +56,5 @@ public class RegistrController {
         }
         return new ResponseEntity<>(ImmutableMap.of("email", env.getProperty("mail.message")), OK);
     }
-
 }
 
