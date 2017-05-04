@@ -1,4 +1,5 @@
 package com.deusto.models;
+import com.deusto.builders.BookBuilder;
 
 import java.util.List;
 
@@ -20,23 +21,6 @@ public class Book {
     private int count;
     private List<String> tags;
 
-    public Book(String id, String title, String authorFirstName, String authorLastName, String genre,
-                String description, Long publishDate, int pages, int ageLimit, int count, List<String> tags) {
-        super();
-        this.id = id;
-        this.title = title;
-        this.authorFirstName = authorFirstName;
-        this.authorLastName = authorLastName;
-        this.genre = genre;
-        this.description = description;
-        this.publishDate = publishDate;
-        this.pages = pages;
-        this.ageLimit = ageLimit;
-        this.count = count;
-        this.tags = tags;
-    }
-
-
     public String getId() {
         return id;
     }
@@ -56,10 +40,6 @@ public class Book {
     public void setAuthorFirstName(String authorFirstName) {
         this.authorFirstName = authorFirstName;
     }
-    public Book() {
-        super();
-    }
-
 
     public String getAuthorLastName() {
         return authorLastName;
