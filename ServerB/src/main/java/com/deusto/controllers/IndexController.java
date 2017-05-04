@@ -12,37 +12,50 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mongodb.Mongo;
-import com.deusto.model.Book;
-import com.deusto.repository.BookRepository;
+import com.deusto.models.Book;
+import com.deusto.repositories.BookRepository;
+import com.deusto.services.EmailTemplate;
 
 @Controller
 public class IndexController {
 
 	@Autowired
 	BookRepository bRepository;
-	
-	@PostMapping(path = "/", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public HttpEntity<?> post(@RequestBody Book book){    	
-		return new ResponseEntity(bRepository.insert(book),HttpStatus.OK);
+
+	@Autowired
+	EmailTemplate emailTemplate;
+
+	@PostMapping(path = "/")
+	public ModelAndView post(@ModelAttribute Book book, Model model){
+		bRepository.insert(book);
+		model.addAttribute("content", bRepository.findAll());
+		return new ModelAndView("list");
 	}
-	
-    @GetMapping(path = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public HttpEntity<?> json(){
-    	return new ResponseEntity(bRepository.findAll(),HttpStatus.OK);
-    }
-    @GetMapping(path = "/insertFake")
-    public HttpEntity<?> index() {
-    	Book bok = new Book();
-    	bok.setTitle("LOTR");
-    	bok.setAuthorFirstName("Tolkien");
-        return new ResponseEntity(bRepository.insert(bok),HttpStatus.OK);
-    }
-    @GetMapping(path = "/basic")
-    public HttpEntity<?> prueba(){
-    	return new ResponseEntity(bRepository.findAll(),HttpStatus.OK);
-    }
+
+	@GetMapping(path = "/")
+	public ModelAndView index(Model model) {
+
+
+		Book bok = new Book();
+		bok.setTitle("not use this");
+		bok.setAuthorFirstName("not use this");
+		bRepository.insert(bok);
+		return new ModelAndView("index","book", new Book());
+	}
+
+	@GetMapping(path = "/json", produces = MediaType.APPLICATION_JSON_VALUE)
+	public HttpEntity<?> json(){
+		return new ResponseEntity(bRepository.findByTitle("not use this"),HttpStatus.OK);
+	}
+
+	@GetMapping(path = "/sendEmailExample")
+	public HttpEntity<?> send() throws Exception{
+		//https://github.com/ozimov/spring-boot-email-tools
+		// access link and teach...
+		emailTemplate.sendMail();
+		return new ResponseEntity("email was send",HttpStatus.OK);
+	}
 }

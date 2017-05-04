@@ -4,20 +4,12 @@ package org.ClientP;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.bson.Document;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.data.mongodb.core.geo.GeoJson;
 
-import com.deusto.model.Book;
+import com.deusto.models.Book;
 import com.mongodb.*;
 import com.mongodb.client.*;
 

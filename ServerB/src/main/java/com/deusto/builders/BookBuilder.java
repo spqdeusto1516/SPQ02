@@ -2,7 +2,7 @@ package com.deusto.builders;
 
 import java.util.List;
 
-import com.deusto.model.Book;
+import com.deusto.models.Book;
 
 public class BookBuilder {
 	
