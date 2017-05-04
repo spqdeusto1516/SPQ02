@@ -16,6 +16,18 @@ public class RegistrService {
     }
 
     public Registr findById(String id) {
-        return registrRepository.findById(id);
+        return registrRepository.findAllById(id);
+    }
+
+    public void update(Registr registr) {
+        registrRepository.save(registr);
+    }
+
+    public Registr findByEmail(String email) {
+        return registrRepository.findAllByEmail(email);
+    }
+
+    public void delete(Registr registr) {
+        registrRepository.delete(registr);
     }
 }
