@@ -1,6 +1,5 @@
 package com.deusto.models;
 
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -9,9 +8,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Reserve {
 	@Id
 	private String id;
-	@DBRef 
+	@DBRef
 	private User user;
-	@DBRef 
+	@DBRef
 	private Book book;
 	private long reserveDate;
 	private long reserveExpire;
@@ -45,4 +44,6 @@ public class Reserve {
 	public void setReserveExpire(long reserveExpire) {
 		this.reserveExpire = reserveExpire;
 	}
+
+
 }

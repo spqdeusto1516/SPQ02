@@ -2,9 +2,11 @@ package com.deusto.controllers;
 
 import com.deusto.builders.RegistrBuilder;
 import com.deusto.dtos.RegistrDTO;
-import com.deusto.email.RegistrForm;
+import com.deusto.forms.email.RegistrForm;
+import com.deusto.repositories.RegistrRepository;
+import com.deusto.repositories.UserRepository;
 import com.deusto.services.RegistrService;
-import com.deusto.mail.EmailService;
+import com.deusto.services.mail.EmailService;
 import com.google.common.collect.ImmutableMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -21,6 +23,7 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.OK;
 
 @Controller
+
 @RequestMapping("/registration")
 public class RegistrController {
 
@@ -32,6 +35,12 @@ public class RegistrController {
 
     @Autowired
     private RegistrService registrService;
+
+    @Autowired
+    private RegistrRepository registrRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<?> registr(@RequestBody RegistrDTO registrDTO) {
@@ -45,5 +54,6 @@ public class RegistrController {
         }
         return new ResponseEntity<>(ImmutableMap.of("email", env.getProperty("mail.message")), OK);
     }
+
 }
 
