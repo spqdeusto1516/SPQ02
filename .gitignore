@@ -11,6 +11,9 @@ ServerB/target/
 ServerB/.settings/
 .settings/
 
+# Added by dianaartiom on May 4th
+**/.settings/
+
 # Package Files 
 *.jar
 *.war
