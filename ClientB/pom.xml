@@ -32,8 +32,8 @@
             <artifactId>jackson-databind</artifactId>
         </dependency>
         <dependency>
-        	<groupId>com.example</groupId>
-        	<artifactId>demo</artifactId>
+        	<groupId>bookit</groupId>
+        	<artifactId>ServerB</artifactId>
         	<version>0.0.1-SNAPSHOT</version>
         </dependency>
   </dependencies>
