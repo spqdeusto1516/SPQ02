@@ -102,5 +102,6 @@
   <modules>
   	<module>ServerB</module>
   	<module>ClientB</module>
+  	<module>../bookit</module>
   </modules>
 </project>
