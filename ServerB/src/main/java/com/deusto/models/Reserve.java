@@ -8,12 +8,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Reserve {
 	@Id
 	private String id;
-	@DBRef
+	@DBRef 
 	private User user;
-	@DBRef
+	@DBRef 
 	private Book book;
 	private long reserveDate;
 	private long reserveExpire;
+
 	public String getId() {
 		return id;
 	}
@@ -44,6 +45,6 @@ public class Reserve {
 	public void setReserveExpire(long reserveExpire) {
 		this.reserveExpire = reserveExpire;
 	}
-
+	
 
 }
