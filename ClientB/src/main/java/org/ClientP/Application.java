@@ -22,14 +22,10 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.codehaus.jackson.map.ObjectMapper;
-import com.deusto.model.Book;
-
-import springfox.documentation.spring.web.json.Json;
-
 import org.hamcrest.Matchers.*;
 import org.json.JSONObject;
 import org.apache.http.*;
-
+import com.deusto.models.*;
 
 /**
  * This class is the same as the ApacheHttpRestClient2 class, but with

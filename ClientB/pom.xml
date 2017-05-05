@@ -23,19 +23,12 @@
       <artifactId>junit</artifactId>
       <scope>test</scope>
     </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-        </dependency>
-        <dependency>
-        	<groupId>bookit</groupId>
-        	<artifactId>ServerB</artifactId>
-        	<version>0.0.1-SNAPSHOT</version>
-        </dependency>
+    <dependency>
+    	<groupId>bookit</groupId>
+    	<artifactId>ServerB</artifactId>
+    	<type>war</type>
+    	<version>0.0.1-SNAPSHOT</version>
+    </dependency>
   </dependencies>
   
 <!-- 	<profiles> -->
