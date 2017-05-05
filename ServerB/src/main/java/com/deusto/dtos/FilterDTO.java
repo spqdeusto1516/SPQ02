@@ -1,8 +1,5 @@
 package com.deusto.dtos;
 
-/**
- * Created by diana on 5/3/17.
- */
 public class FilterDTO {
 
     private String title;

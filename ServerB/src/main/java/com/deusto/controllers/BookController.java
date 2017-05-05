@@ -45,12 +45,6 @@ public class BookController {
         return new ResponseEntity(bookService.findById(id), OK);
     }
 
-//    /* trial pentru parametri de filtrare */
-//    @GetMapping
-//    public HttpEntity<?> getAllBooksFilter(@RequestParam(value = "title") String title) {
-//        return new ResponseEntity(bookService.findByTitle(title), OK);
-//    }
-
     @PostMapping(path = "/filter", consumes = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<?> getAllBooksFilter1(@RequestBody FilterDTO filterDTO) {
         Set set = new HashSet();
