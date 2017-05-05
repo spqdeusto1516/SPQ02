@@ -1,27 +1,27 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<modelVersion>4.0.0</modelVersion>
 
-  <groupId>bookit</groupId>
-  <artifactId>SPQ02</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>pom</packaging>
+    <groupId>bookit</groupId>
+    <artifactId>SPQ02</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
-  <name>prueba</name>
-  <url>http://maven.apache.org</url>
+    <name>bookit</name>
+    <url>http://maven.apache.org</url>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>1.8</java.version>
-		<emailservice.version>0.5.2</emailservice.version>
-		<spring-boot-mongeez.version>1.3.0</spring-boot-mongeez.version>
-		<swagger.version>2.4.0</swagger.version>
-		<server.port>1099</server.port>
-		<server.Name>Server</server.Name>
-		<server.IP>127.0.0.1</server.IP>
-		<config.files.dir>${basedir}/src/main/resources</config.files.dir>
-	</properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <emailservice.version>0.5.2</emailservice.version>
+        <spring-boot-mongeez.version>1.3.0</spring-boot-mongeez.version>
+        <swagger.version>2.4.0</swagger.version>
+        <server.port>1099</server.port>
+        <server.Name>Server</server.Name>
+        <server.IP>127.0.0.1</server.IP>
+        <config.files.dir>${basedir}/src/main/resources</config.files.dir>
+    </properties>
 
 	
  <dependencies>
@@ -42,39 +42,22 @@
 	        <groupId>javax.servlet</groupId>
 	        <artifactId>jstl</artifactId>
 	    </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.jayway.jsonpath</groupId>
             <artifactId>json-path</artifactId>
             <scope>test</scope>
         </dependency>
+
+
         <dependency>
-		    <groupId>io.springfox</groupId>
-		    <artifactId>springfox-swagger2</artifactId>
-		    <version>${swagger.version}</version>
-		</dependency>
-		<dependency>
-		    <groupId>io.springfox</groupId>
-		    <artifactId>springfox-swagger-ui</artifactId>
-		    <version>${swagger.version}</version>
-		</dependency>
-		
-		<dependency>
-		    <groupId>it.ozimov</groupId>
-		    <artifactId>spring-boot-email-core</artifactId>
-		    <version>${emailservice.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
+            <groupId>commons-validator</groupId>
+            <artifactId>commons-validator</artifactId>
+            <version>LATEST</version>
         </dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -96,13 +79,11 @@
    	 		<artifactId>jsoup</artifactId>
     		<version>1.8.3</version>
 		</dependency>
-
 		<dependency>
 			<groupId>commons-validator</groupId>
 			<artifactId>commons-validator</artifactId>
 			<version>LATEST</version>
 		</dependency>
-
 		<dependency>
 			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>
@@ -162,7 +143,6 @@
     		<artifactId>spring-tx</artifactId>
     	</dependency>
   	</dependencies>
-
   <parent>
   	<groupId>org.springframework.boot</groupId>
   	<artifactId>spring-boot-starter-parent</artifactId>
@@ -173,4 +153,5 @@
   	<module>ServerB</module>
   	<module>ClientB</module>
   </modules>
+
 </project>
