@@ -4,10 +4,16 @@
 ClientB/*.classpath
 ClientB/*.project
 ClientB/target/
+ClientB/target/classes
+ClientB/target/classes/META-INF
 ClientB/.settings/
 ServerB/*.classpath
 ServerB/*.project
 ServerB/target/
+ServerB/target/classes
+ServerB/target/classes/META-INF
+ServerB/target/classes/db
+ServerB/target/classes/db/changes
 ServerB/.settings/
 .settings/
 
