@@ -1,48 +1,58 @@
 package com.deusto.controllers;
 
-import org.mongeez.Mongeez;
+import com.deusto.models.Book;
+import com.deusto.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.mongodb.Mongo;
-import com.deusto.model.Book;
-import com.deusto.repository.BookRepository;
+import javax.validation.Valid;
 
 @Controller
+@RequestMapping(path = "/index")
 public class IndexController {
 
 	@Autowired
-	BookRepository bRepository;
-	
-	@PostMapping(path = "/", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public HttpEntity<?> post(@RequestBody Book book){    	
-		return new ResponseEntity(bRepository.insert(book),HttpStatus.OK);
+	private BookService bookService;
+
+	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+	public HttpEntity<?> post(@RequestBody @Valid Book book) {
+		return new ResponseEntity<>(bookService.insert(book), HttpStatus.OK);
 	}
-	
-    @GetMapping(path = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public HttpEntity<?> json(){
-    	return new ResponseEntity(bRepository.findAll(),HttpStatus.OK);
-    }
-    @GetMapping(path = "/insertFake")
-    public HttpEntity<?> index() {
-    	Book bok = new Book();
-    	bok.setTitle("LOTR");
-    	bok.setAuthorFirstName("Tolkien");
-        return new ResponseEntity(bRepository.insert(bok),HttpStatus.OK);
-    }
-    @GetMapping(path = "/basic")
-    public HttpEntity<?> prueba(){
-    	return new ResponseEntity(bRepository.findAll(),HttpStatus.OK);
-    }
+
+	@GetMapping(path = "/auth", produces = MediaType.APPLICATION_JSON_VALUE)
+	public HttpEntity<?> auth() {
+		Book book = new Book();
+		book.setAuthorFirstName("test");
+		book.setAuthorLastName("test");
+		book.setAgeLimit(18);
+		book.setCount(3);
+		return new ResponseEntity(bookService.insert(book), HttpStatus.OK);
+	}
+
+	@GetMapping(path = "/unauth", produces = MediaType.APPLICATION_JSON_VALUE)
+	public HttpEntity<?> unAuth() {
+		Book book = new Book();
+		book.setAuthorFirstName("test");
+		book.setAuthorLastName("test");
+		book.setAgeLimit(18);
+		book.setCount(3);
+		return new ResponseEntity(bookService.insert(book), HttpStatus.OK);
+	}
+
+	@GetMapping(path = "/insertFake")
+	public HttpEntity<?> index() {
+		Book bok = new Book();
+		bok.setTitle("not use this");
+		bok.setAuthorFirstName("not use this");
+		return new ResponseEntity(bookService.insert(bok), HttpStatus.OK);
+	}
+
 }

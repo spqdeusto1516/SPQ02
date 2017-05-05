@@ -11,6 +11,12 @@ ServerB/target/
 ServerB/.settings/
 .settings/
 
+# Added by dianaartiom on May 4th
+#---------generated--------------
+**/.settings/
+#---------intellij ide-----------
+**/.idea/
+**/*.iml
 # Package Files 
 *.jar
 *.war
