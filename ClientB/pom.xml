@@ -26,7 +26,7 @@
     <dependency>
     	<groupId>bookit</groupId>
     	<artifactId>ServerB</artifactId>
-    	<type>war</type>
+    	<type>jar</type>
     	<version>0.0.1-SNAPSHOT</version>
     </dependency>
   </dependencies>
