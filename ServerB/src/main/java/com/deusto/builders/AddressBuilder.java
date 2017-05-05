@@ -1,7 +1,7 @@
 package com.deusto.builders;
 
-import com.deusto.dtos.AddressDTO;
 import com.deusto.models.Address;
+import com.deusto.dtos.AddressDTO;
 
 public class AddressBuilder {
 

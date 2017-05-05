@@ -20,48 +20,48 @@ import javax.validation.Valid;
 @RequestMapping(path = "/index")
 public class IndexController {
 
-	@Autowired
-	private BookService bookService;
+    @Autowired
+    private BookService bookService;
 
-	@Autowired
-	private AuthenticationService authenticationService;
+    @Autowired
+    private AuthenticationService authenticationService;
 
-	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-	public HttpEntity<?> post(@RequestBody @Valid Book book) {
-		return new ResponseEntity<>(bookService.insert(book), HttpStatus.OK);
-	}
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public HttpEntity<?> post(@RequestBody @Valid Book book) {
+        return new ResponseEntity<>(bookService.insert(book), HttpStatus.OK);
+    }
 
-	@GetMapping(path = "/auth", produces = MediaType.APPLICATION_JSON_VALUE)
-	public HttpEntity<?> auth() {
-		Book book = new Book();
-		book.setAuthorFirstName("test");
-		book.setAuthorLastName("test");
-		book.setAgeLimit(18);
-		book.setCount(3);
-		return new ResponseEntity(bookService.insert(book), HttpStatus.OK);
-	}
+    @GetMapping(path = "/auth", produces = MediaType.APPLICATION_JSON_VALUE)
+    public HttpEntity<?> auth() {
+        Book book = new Book();
+        book.setAuthorFirstName("test");
+        book.setAuthorLastName("test");
+        book.setAgeLimit(18);
+        book.setCount(3);
+        return new ResponseEntity(bookService.insert(book), HttpStatus.OK);
+    }
 
-	@GetMapping(path = "/authUser", produces = MediaType.APPLICATION_JSON_VALUE)
-	public HttpEntity<?> authUser() {
-		return new ResponseEntity(authenticationService.getUserFromRequest(), HttpStatus.OK);
-	}
+    @GetMapping(path = "/authUser", produces = MediaType.APPLICATION_JSON_VALUE)
+    public HttpEntity<?> authUser() {
+        return new ResponseEntity(authenticationService.getUserFromRequest(), HttpStatus.OK);
+    }
 
-	@GetMapping(path = "/unauth", produces = MediaType.APPLICATION_JSON_VALUE)
-	public HttpEntity<?> unAuth() {
-		Book book = new Book();
-		book.setAuthorFirstName("test");
-		book.setAuthorLastName("test");
-		book.setAgeLimit(18);
-		book.setCount(3);
-		return new ResponseEntity(bookService.insert(book), HttpStatus.OK);
-	}
+    @GetMapping(path = "/unauth", produces = MediaType.APPLICATION_JSON_VALUE)
+    public HttpEntity<?> unAuth() {
+        Book book = new Book();
+        book.setAuthorFirstName("test");
+        book.setAuthorLastName("test");
+        book.setAgeLimit(18);
+        book.setCount(3);
+        return new ResponseEntity(bookService.insert(book), HttpStatus.OK);
+    }
 
-	@GetMapping(path = "/insertFake")
-	public HttpEntity<?> index() {
-		Book bok = new Book();
-		bok.setTitle("not use this");
-		bok.setAuthorFirstName("not use this");
-		return new ResponseEntity(bookService.insert(bok), HttpStatus.OK);
-	}
+    @GetMapping(path = "/insertFake")
+    public HttpEntity<?> index() {
+        Book bok = new Book();
+        bok.setTitle("not use this");
+        bok.setAuthorFirstName("not use this");
+        return new ResponseEntity(bookService.insert(bok), HttpStatus.OK);
+    }
 
 }

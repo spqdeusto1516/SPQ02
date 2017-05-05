@@ -1,6 +1,7 @@
 package com.deusto.services;
 
 import com.deusto.models.User;
+import com.deusto.repositories.AddressRepository;
 import com.deusto.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,12 +13,16 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private AddressRepository addressRepository;
+
     public User insert(User user) {
+        user.setAddress(addressRepository.insert(user.getAddress()));
         return userRepository.insert(user);
     }
 
     public User findById(String id) {
-        return userRepository.findById(id);
+        return userRepository.findUserById(id);
     }
 
     public List<User> findbyFirstName(String firstName) {
@@ -40,7 +45,7 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void delete(User user) {
+    public void delete(User  user) {
         userRepository.delete(user);
     }
 }

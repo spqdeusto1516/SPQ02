@@ -6,11 +6,11 @@ import com.deusto.dtos.LoginDTO;
 import com.deusto.dtos.PersonDTO;
 import com.deusto.dtos.RegistrDTO;
 import com.deusto.forms.email.RegistrForm;
-import com.deusto.mail.EmailService;
 import com.deusto.models.Registr;
 import com.deusto.security.AuthenticationService;
 import com.deusto.services.RegistrService;
 import com.deusto.services.UserService;
+import com.deusto.services.mail.EmailService;
 import com.google.common.collect.ImmutableMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -76,3 +76,4 @@ public class RegistrController {
     }
 
 }
+

@@ -16,7 +16,7 @@ public class RegistrService {
     }
 
     public Registr findById(String id) {
-        return registrRepository.findAllById(id);
+        return registrRepository.findRegistrById(id);
     }
 
     public void update(Registr registr) {
@@ -24,7 +24,7 @@ public class RegistrService {
     }
 
     public Registr findByEmail(String email) {
-        return registrRepository.findAllByEmail(email);
+        return registrRepository.findByEmail(email);
     }
 
     public void delete(Registr registr) {
