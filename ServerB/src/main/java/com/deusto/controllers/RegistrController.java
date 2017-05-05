@@ -5,12 +5,12 @@ import com.deusto.builders.UserBuilder;
 import com.deusto.dtos.LoginDTO;
 import com.deusto.dtos.PersonDTO;
 import com.deusto.dtos.RegistrDTO;
-import com.deusto.email.RegistrForm;
+import com.deusto.forms.email.RegistrForm;
+import com.deusto.mail.EmailService;
 import com.deusto.models.Registr;
 import com.deusto.security.AuthenticationService;
 import com.deusto.services.RegistrService;
 import com.deusto.services.UserService;
-import com.deusto.mail.EmailService;
 import com.google.common.collect.ImmutableMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -68,7 +68,6 @@ public class RegistrController {
 
     @PostMapping(path = "/person", produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<?> lastStep(@RequestBody @Valid PersonDTO person) {
-        //TODO ADD CONTROLLERADVICE
         Registr registr = registrService.findByEmail(person.getEmail());
         if (!registr.isActiv()) return new ResponseEntity<>(ImmutableMap.of("message", "activate email"), BAD_REQUEST);
         LoginDTO loginDTO = UserBuilder.get(userService.insert(UserBuilder.get(registr, person)));
@@ -77,4 +76,3 @@ public class RegistrController {
     }
 
 }
-
