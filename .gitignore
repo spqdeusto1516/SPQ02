@@ -23,4 +23,4 @@ ServerB/.settings/
 *.ear
 
 # Documentation Files
-*.pdf
+#*.pdf
