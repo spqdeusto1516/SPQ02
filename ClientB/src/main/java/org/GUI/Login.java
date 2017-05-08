@@ -124,7 +124,7 @@ public class Login extends JFrame implements ActionListener {
 		lblCreateAnAccount.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-              // Register rg= new Register(); 
+               Register rg= new Register(); 
             }
 
         });
