@@ -74,13 +74,8 @@ public class Application {
 		Application app = new Application();
 		HttpEntity entity = app.startConnection("http://localhost:8080/book");
 		ArrayList<Book> books = app.getBooks(entity);
-		System.out.println(books.get(0).getId());
-		System.out.println(books.get(1).getId());
-		System.out.println(books.get(2).getId());
-		System.out.println(books.get(3).getId());
-		System.out.println(books.get(4).getId());
-		System.out.println(books.get(5).getId());
-		System.out.println(books.get(6).getTitle());
-		System.out.println(books.get(6).getGenre());  
+		System.out.println(books.get(0).getTags().get(0));
+		System.out.println(books.get(0).getTags().get(1));
+		 
 	}
  }
