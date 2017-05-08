@@ -38,6 +38,7 @@ public class ReserveController {
         return new ResponseEntity(reserveService.findAll(), HttpStatus.OK);
     }
 
+    /* trebuie de verificat count-ul */
     @PostMapping(path = "/create", consumes = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<?> newReserve(@RequestBody ReserveDTO reserveDTO) {
 

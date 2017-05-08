@@ -8,12 +8,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Reserve {
 	@Id
 	private String id;
-	@DBRef 
+	@DBRef
 	private User user;
-	@DBRef 
+	@DBRef
 	private Book book;
-	private long reserveDate;
-	private long reserveExpire;
+	private Long reserveDate;
+	private Long reserveExpire;
 
 	public String getId() {
 		return id;
@@ -33,18 +33,20 @@ public class Reserve {
 	public void setBook(Book book) {
 		this.book = book;
 	}
-	public long getReserveDate() {
+
+	public Long getReserveDate() {
 		return reserveDate;
 	}
-	public void setReserveDate(long reserveDate) {
+
+	public void setReserveDate(Long reserveDate) {
 		this.reserveDate = reserveDate;
 	}
-	public long getReserveExpire() {
+
+	public Long getReserveExpire() {
 		return reserveExpire;
 	}
-	public void setReserveExpire(long reserveExpire) {
+
+	public void setReserveExpire(Long reserveExpire) {
 		this.reserveExpire = reserveExpire;
 	}
-	
-
 }

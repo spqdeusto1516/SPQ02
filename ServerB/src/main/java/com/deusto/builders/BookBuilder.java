@@ -1,62 +1,69 @@
 package com.deusto.builders;
 
-import java.util.List;
-
 import com.deusto.dtos.BookDTO;
 import com.deusto.models.Book;
 
+import java.util.List;
+
 public class BookBuilder {
-	
-	private Book book;
-	
+
+	private Book book = new Book();
+
+	private BookBuilder() {
+	}
+
 	public BookBuilder title(String title) {
 		this.book.setTitle(title);
 		return this;
 	}
-	
+
 	public BookBuilder authorFirstName(String authorFirstName) {
 		this.book.setAuthorFirstName(authorFirstName);
 		return this;
 	}
-	
+
 	public BookBuilder authorLastName(String authorLastName) {
 		this.book.setAuthorLastName(authorLastName);
 		return this;
 	}
-	
+
 	public BookBuilder genre(String genre) {
 		this.book.setGenre(genre);
 		return this;
 	}
-	
+
 	public BookBuilder description(String description) {
 		this.book.setDescription(description);
 		return this;
 	}
-	
+
 	public BookBuilder publishDate(Long publishDate) {
 		this.book.setPublishDate(publishDate);
 		return this;
 	}
-	
-	public BookBuilder pages(int pages) {
+
+	public BookBuilder pages(Integer pages) {
 		this.book.setPages(pages);
 		return this;
 	}
-	
-	public BookBuilder ageLimit(int ageLimit) {
+
+	public BookBuilder ageLimit(Integer ageLimit) {
 		this.book.setAgeLimit(ageLimit);
 		return this;
 	}
-	
-	public BookBuilder count(int count) {
+
+	public BookBuilder count(Integer count) {
 		this.book.setCount(count);
 		return this;
 	}
-	
+
 	public BookBuilder tags(List<String> tags) {
 		this.book.setTags(tags);
 		return this;
+	}
+
+	public static BookBuilder builder() {
+		return new BookBuilder();
 	}
 
 	public Book build() {
