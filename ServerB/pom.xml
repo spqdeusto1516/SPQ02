@@ -9,7 +9,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <parent>
         <artifactId>SPQ02</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
+<!--         <relativePath/> lookup parent from repository -->
         <groupId>bookit</groupId>
     </parent>
     <!--<artifactId>ServerB</artifactId>-->

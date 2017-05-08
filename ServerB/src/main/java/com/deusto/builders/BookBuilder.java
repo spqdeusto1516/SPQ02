@@ -73,6 +73,8 @@ public class BookBuilder {
 		book.setPages(bookDTO.getPages());
 		book.setPublishDate(bookDTO.getPublishDate());
 		book.setTitle(bookDTO.getTitle());
+		book.setGenre(bookDTO.getGenre());
+		book.setTags(bookDTO.getTags());
 		return book;
 	}
 }
