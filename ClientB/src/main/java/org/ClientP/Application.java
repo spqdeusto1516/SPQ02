@@ -4,8 +4,7 @@ package org.ClientP;
 import java.io.*;
 import java.util.ArrayList;
 
-import com.deusto.dtos.FilterDTO;
-import com.deusto.models.Book;
+import org.models.Book;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -18,6 +17,7 @@ import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.dtos.FilterDTO;
 import org.apache.http.*;
 
 public class Application {
