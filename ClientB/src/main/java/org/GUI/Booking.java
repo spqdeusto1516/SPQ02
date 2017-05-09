@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import javax.swing.ImageIcon;
@@ -18,13 +19,20 @@ import javax.swing.table.DefaultTableModel;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
+
+import org.ClientP.Application;
+import org.apache.http.HttpEntity;
+import org.apache.http.client.ClientProtocolException;
 import org.models.Book;
 import org.models.User;
+
+import org.dtos.FilterDTO;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.JTable;
 import javax.swing.JComboBox;
@@ -51,7 +59,7 @@ public class Booking extends JFrame implements ActionListener {
 	private JButton btnBook;
 	private JLabel lblBy;
 
-	public Booking() {
+	public Booking() throws ClientProtocolException, IOException {
 		newUser = new User();
 
 		BackgroundBooking background = new BackgroundBooking();
@@ -102,7 +110,11 @@ public class Booking extends JFrame implements ActionListener {
 		for (int i = 0; i < titles.length; i++) {
 			dtm.addColumn(titles[i]);
 		}
-		LinkedList<Book>books = new LinkedList<Book>();
+		dtm.addRow(titles);
+		Application app = new Application();
+		HttpEntity entity = app.startConnectionGet("http://localhost:8080/book");
+		ArrayList<Book> books = app.getBooks(entity);
+		
 		//books.add(new Book("1212", "Romeo y Julieta","William", "Shakespeare","Drama", "They die", 2012190383 , 300, 13, 7));
 		for (int i = 0; i <books.size(); i++) {
 			Book book = books.get(i);
@@ -165,7 +177,7 @@ public class Booking extends JFrame implements ActionListener {
 
 
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ClientProtocolException, IOException {
 		Booking x = new Booking();
 	}
 

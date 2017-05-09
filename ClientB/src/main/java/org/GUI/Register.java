@@ -181,7 +181,11 @@ public class Register extends JFrame implements ActionListener {
 								"You have to complete everything!", "ERROR",
 								JOptionPane.ERROR_MESSAGE);
 					} else if (!name.getText().equals("")){
+						JOptionPane.showMessageDialog(null,
+								"We have sent a confirmation email to your email address, please confirm your account.", "Information",
+								JOptionPane.INFORMATION_MESSAGE);
 						this.dispose();
+						
 					//Introduce in the database the new user and he/she should log in in the previous window
 				} 
 			

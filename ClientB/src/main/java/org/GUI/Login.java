@@ -12,6 +12,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -22,6 +23,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 
+import org.apache.http.client.ClientProtocolException;
 import org.models.*;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -163,7 +165,15 @@ public class Login extends JFrame implements ActionListener {
 				} else {
 					this.dispose();
 					//Here we have to see if the user is in the database and if it is login and if not suggest to register
-					//Booking b= new Booking();
+					try {
+						Booking b= new Booking();
+					} catch (ClientProtocolException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				} 
 		} 
 	}
