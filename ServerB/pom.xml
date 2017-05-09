@@ -155,17 +155,5 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
         </pluginRepository>
     </pluginRepositories>
 
-    <profiles>
-        <profile>
-            <id>serverB</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.springframework.boot</groupId>
-                        <artifactId>spring-boot-maven-plugin</artifactId>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
+
 </project>
