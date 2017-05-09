@@ -3,7 +3,7 @@ package org.dtos;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import com.deusto.dtos.AddressDTO;
+import org.dtos.AddressDTO;
 
 public class PersonDTO {
     @Email
