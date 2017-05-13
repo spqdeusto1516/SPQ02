@@ -3,7 +3,6 @@
   <head>   
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Copernica Marketing Software</title>
     <style type="text/css">
       
       /* Default CSS */
@@ -104,7 +103,7 @@
             <table border="0" cellspacing="0" cellpadding="0" width="640" align="center" summary="">
               <tr>
                 <td class="logoContainer" align="center">
-                  <a href="/" title="BookIt Logo">
+                  <a href="http://localhost:8080/swagger-ui.html#/" title="BookIt Logo">
                     <img class="logo" src="http://i.imgur.com/KKU9KP9.png" alt="BookIt" />
                   </a>
                 </td>
@@ -161,7 +160,7 @@
               <tr>
                 <td class="buttonContainer">
                   <table border="0" cellpadding="0" cellspacing="0" summary="" width="30%" align="center">
-                    <tr><td class="button">Registration</td></tr>
+                    <tr><td class="button"><a href="${url}">Registration</a></td></tr>
                   </table>
                 </td>
               </tr>
