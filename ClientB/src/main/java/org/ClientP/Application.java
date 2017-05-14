@@ -17,7 +17,7 @@ import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.dtos.FilterDTO;
+import org.dtos.*;
 import org.apache.http.*;
 
 public class Application {
@@ -35,9 +35,9 @@ public class Application {
 	}
 	
 	
-	public HttpEntity getBooksFilter(String url, FilterDTO filter) throws ClientProtocolException, IOException{
+	public HttpEntity getBooksFilter(FilterDTO filter) throws ClientProtocolException, IOException{
 		HttpClient httpClient = HttpClientBuilder.create().build();
-		HttpPost httpPostRequest = new HttpPost(url);
+		HttpPost httpPostRequest = new HttpPost("http://localhost:8080/book/filter");
 		ObjectMapper mapper = new ObjectMapper();
 		String json= mapper.writeValueAsString(filter);
 		System.out.println(json);
@@ -46,6 +46,44 @@ public class Application {
 	    httpPostRequest.setHeader("Accept", "application/json");
 	    httpPostRequest.setHeader("Content-type", "application/json");
 		return httpClient.execute(httpPostRequest).getEntity();
+	}
+	public void registr1(RegistrDTO registr) throws ClientProtocolException, IOException{
+		HttpClient httpClient = HttpClientBuilder.create().build();
+		HttpPost httpPostRequest = new HttpPost("http://localhost:8080/registration");
+		ObjectMapper mapper = new ObjectMapper();
+		String json= mapper.writeValueAsString(registr);
+		System.out.println(json);
+		StringEntity entity = new StringEntity(json);
+		httpPostRequest.setEntity(entity);
+	    httpPostRequest.setHeader("Accept", "application/json");
+	    httpPostRequest.setHeader("Content-type", "application/json");
+	    httpClient.execute(httpPostRequest);
+	}
+	
+	public void registr2(RegistrDTO registr) throws ClientProtocolException, IOException{
+		HttpClient httpClient = HttpClientBuilder.create().build();
+		HttpPost httpPostRequest = new HttpPost("http://localhost:8080/registration");
+		ObjectMapper mapper = new ObjectMapper();
+		String json= mapper.writeValueAsString(registr);
+		System.out.println(json);
+		StringEntity entity = new StringEntity(json);
+		httpPostRequest.setEntity(entity);
+	    httpPostRequest.setHeader("Accept", "application/json");
+	    httpPostRequest.setHeader("Content-type", "application/json");
+	    httpClient.execute(httpPostRequest);
+	}
+	
+	public void login(LoginDTO login) throws ClientProtocolException, IOException{
+		HttpClient httpClient = HttpClientBuilder.create().build();
+		HttpPost httpPostRequest = new HttpPost("http://localhost:8080/login");
+		ObjectMapper mapper = new ObjectMapper();
+		String json= mapper.writeValueAsString(login);
+		System.out.println(json);
+		StringEntity entity = new StringEntity(json);
+		httpPostRequest.setEntity(entity);
+	    httpPostRequest.setHeader("Accept", "application/json");
+	    httpPostRequest.setHeader("Content-type", "application/json");
+	    httpClient.execute(httpPostRequest);
 	}
 	
 	public ArrayList<Book> getBooks(HttpEntity entity) throws JsonParseException, JsonMappingException, IOException{
@@ -83,8 +121,15 @@ public class Application {
 		System.out.println(books.get(0).getTags().get(1));
 		FilterDTO filter = new FilterDTO();
 		filter.setTitle("hello");
-		HttpEntity entity2 = app.getBooksFilter("http://localhost:8080/book/filter", filter);
+		HttpEntity entity2 = app.getBooksFilter(filter);
 		app.getBooks(entity2);
-		 
+		RegistrDTO registr = new RegistrDTO();
+		registr.setEmail("ander.areizagab@opendeusto.es");
+		registr.setFirstname("Ander");
+		registr.setLastname("Areizaga");
+		app.registr1(registr);
+//		LoginDTO login = new LoginDTO();
+//		login.setEmail("ander.areizagab@opendeusto.es");
+//		login.setEncryptedPassword("1234");
 	}
  }
