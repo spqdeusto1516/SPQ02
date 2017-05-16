@@ -5,6 +5,10 @@ import java.io.*;
 import java.util.ArrayList;
 
 import org.models.Book;
+import org.models.Token;
+import org.security.TokenUtils;
+
+import com.mongodb.util.JSON;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -19,6 +23,9 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.dtos.*;
 import org.apache.http.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 
 public class Application {
 		
@@ -73,7 +80,7 @@ public class Application {
 	    httpClient.execute(httpPostRequest);
 	}
 	
-	public void login(LoginDTO login) throws ClientProtocolException, IOException{
+	public HttpEntity login(LoginDTO login) throws ClientProtocolException, IOException{
 		HttpClient httpClient = HttpClientBuilder.create().build();
 		HttpPost httpPostRequest = new HttpPost("http://localhost:8080/login");
 		ObjectMapper mapper = new ObjectMapper();
@@ -83,7 +90,35 @@ public class Application {
 		httpPostRequest.setEntity(entity);
 	    httpPostRequest.setHeader("Accept", "application/json");
 	    httpPostRequest.setHeader("Content-type", "application/json");
-	    httpClient.execute(httpPostRequest);
+	    return httpClient.execute(httpPostRequest).getEntity();
+	}
+	
+	public Token getToken(HttpEntity entity) throws IOException{
+		Token token = new Token();
+		ObjectMapper mapper = new ObjectMapper();
+	    byte[] buffer = new byte[65536];
+	    if (entity != null) {
+	        InputStream inputStream = null;
+			inputStream = entity.getContent();
+	        BufferedInputStream bis = new BufferedInputStream(inputStream);
+	        int i = 0;
+	        int j = 0;
+	        while((buffer[i] = (byte) bis.read()) != -1){
+	        	if(buffer[i] == 125){
+	        		String chunk = new String(buffer, 0, i+1);
+	        		System.out.println(chunk);
+	        		token = mapper.readValue(chunk, Token.class);
+	        		System.out.println(token.getToken());
+	        		j++;
+	        		i = 0; 
+	        	}
+	        	else{
+	        		i++;
+	        	}
+	       }
+	    }
+		return token;
+		
 	}
 	
 	public ArrayList<Book> getBooks(HttpEntity entity) throws JsonParseException, JsonMappingException, IOException{
@@ -123,13 +158,16 @@ public class Application {
 		filter.setTitle("hello");
 		HttpEntity entity2 = app.getBooksFilter(filter);
 		app.getBooks(entity2);
-		RegistrDTO registr = new RegistrDTO();
-		registr.setEmail("ander.areizagab@opendeusto.es");
-		registr.setFirstname("Ander");
-		registr.setLastname("Areizaga");
-		app.registr1(registr);
-//		LoginDTO login = new LoginDTO();
-//		login.setEmail("ander.areizagab@opendeusto.es");
-//		login.setEncryptedPassword("1234");
+//		RegistrDTO registr = new RegistrDTO();
+//		registr.setEmail("ander.areizagab@opendeusto.es");
+//		registr.setFirstname("Ander");
+//		registr.setLastname("Areizaga");
+//		app.registr1(registr);
+		LoginDTO login = new LoginDTO();
+		login.setEmail("ander.areizagab@opendeusto.es");
+		login.setEncryptedPassword("1234");
+		HttpEntity entity3 = app.login(login);
+		Token token = app.getToken(entity3);
+		TokenUtils tk = new TokenUtils();
 	}
  }
