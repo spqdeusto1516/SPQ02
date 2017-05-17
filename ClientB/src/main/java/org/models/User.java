@@ -18,7 +18,17 @@ public class User {
 
     @DBRef(lazy = true)
     private Address address;
-
+    public User(){
+    	
+    }
+    public User(String email, long birthDate, String countryCode, int phone, String password, Address address){
+    	this.email = email;
+    	this.birthDate = birthDate;
+    	this.countryCode = countryCode;
+    	this.phone = phone;
+    	this.password = password;
+    	this.address = address;
+    }
     public String getId() {
 		return id;
 	}

@@ -4,8 +4,10 @@ package org.ClientP;
 import java.io.*;
 import java.util.ArrayList;
 
+import org.models.Address;
 import org.models.Book;
 import org.models.Token;
+import org.models.User;
 import org.security.TokenUtils;
 
 import com.mongodb.util.JSON;
@@ -67,11 +69,11 @@ public class Application {
 	    httpClient.execute(httpPostRequest);
 	}
 	
-	public void registr2(RegistrDTO registr) throws ClientProtocolException, IOException{
+	public void registr2(User user) throws ClientProtocolException, IOException{
 		HttpClient httpClient = HttpClientBuilder.create().build();
-		HttpPost httpPostRequest = new HttpPost("http://localhost:8080/registration");
+		HttpPost httpPostRequest = new HttpPost("http://localhost:8080/registration/person");
 		ObjectMapper mapper = new ObjectMapper();
-		String json= mapper.writeValueAsString(registr);
+		String json= mapper.writeValueAsString(user);
 		System.out.println(json);
 		StringEntity entity = new StringEntity(json);
 		httpPostRequest.setEntity(entity);
@@ -120,6 +122,18 @@ public class Application {
 		return token;
 		
 	}
+	public void reserve(ReserveDTO reserv) throws JsonGenerationException, JsonMappingException, IOException{
+		HttpClient httpClient = HttpClientBuilder.create().build();
+		HttpPost httpPostRequest = new HttpPost("http://localhost:8080/reservation/create");
+		ObjectMapper mapper = new ObjectMapper();
+		String json= mapper.writeValueAsString(reserv);
+		System.out.println(json);
+		StringEntity entity = new StringEntity(json);
+		httpPostRequest.setEntity(entity);
+	    httpPostRequest.setHeader("Accept", "application/json");
+	    httpPostRequest.setHeader("Content-type", "application/json");
+	    httpClient.execute(httpPostRequest);
+	}
 	
 	public ArrayList<Book> getBooks(HttpEntity entity) throws JsonParseException, JsonMappingException, IOException{
 		ArrayList<Book> books = new ArrayList<>();
@@ -153,21 +167,24 @@ public class Application {
 		HttpEntity entity = app.startConnectionGet("http://localhost:8080/book");
 		ArrayList<Book> books = app.getBooks(entity);
 		System.out.println(books.get(0).getTags().get(0));
-		System.out.println(books.get(0).getTags().get(1));
+		System.out.println(books.get(0).getId());
 		FilterDTO filter = new FilterDTO();
 		filter.setTitle("hello");
 		HttpEntity entity2 = app.getBooksFilter(filter);
 		app.getBooks(entity2);
-//		RegistrDTO registr = new RegistrDTO();
-//		registr.setEmail("ander.areizagab@opendeusto.es");
+		RegistrDTO registr = new RegistrDTO();
+//		registr.setEmail("anderareizaga1996@gmail.com");
 //		registr.setFirstname("Ander");
 //		registr.setLastname("Areizaga");
 //		app.registr1(registr);
+//		Address adrs = new Address("Rafaela Ybarra", 5, 2, "48014", "Bilbao", "Spain");
+//		User user = new User("anderareizaga1996@gmail.com", 120696, "48014", 633419296, "1234", adrs);
+//		app.registr2(user);
 		LoginDTO login = new LoginDTO();
 		login.setEmail("ander.areizagab@opendeusto.es");
 		login.setEncryptedPassword("1234");
 		HttpEntity entity3 = app.login(login);
-		Token token = app.getToken(entity3);
-		TokenUtils tk = new TokenUtils();
+//		Token token = app.getToken(entity3);
+//		TokenUtils tk = new TokenUtils();
 	}
  }

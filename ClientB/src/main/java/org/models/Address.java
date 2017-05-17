@@ -13,6 +13,15 @@ public class Address {
 	private String postalCode;
 	private String city;
 	private String country;
+	public Address(){}
+	public Address(String street, int houseNumber, int apartamentNumber, String postalCode, String city, String country){
+		this.street = street;
+		this.houseNumber = houseNumber;
+		this.apartamentNumber = apartamentNumber;
+		this.postalCode = postalCode;
+		this.city = city;
+		this.country = country;
+	}
 	public String getId() {
 		return id;
 	}
