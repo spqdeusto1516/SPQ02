@@ -30,10 +30,10 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 public class Application {
-		
+		private HttpClient httpClient = HttpClientBuilder.create().build();
 	
 	public HttpEntity startConnectionGet(String url) throws ClientProtocolException, IOException{
-		HttpClient httpClient = HttpClientBuilder.create().build();
+		
 		HttpGet httpGetRequest = new HttpGet(url);
 		HttpResponse httpResponse = httpClient.execute(httpGetRequest);
 		HttpEntity entity = httpResponse.getEntity();
@@ -45,7 +45,6 @@ public class Application {
 	
 	
 	public HttpEntity getBooksFilter(FilterDTO filter) throws ClientProtocolException, IOException{
-		HttpClient httpClient = HttpClientBuilder.create().build();
 		HttpPost httpPostRequest = new HttpPost("http://localhost:8080/book/filter");
 		ObjectMapper mapper = new ObjectMapper();
 		String json= mapper.writeValueAsString(filter);
@@ -57,7 +56,6 @@ public class Application {
 		return httpClient.execute(httpPostRequest).getEntity();
 	}
 	public void registr1(RegistrDTO registr) throws ClientProtocolException, IOException{
-		HttpClient httpClient = HttpClientBuilder.create().build();
 		HttpPost httpPostRequest = new HttpPost("http://localhost:8080/registration");
 		ObjectMapper mapper = new ObjectMapper();
 		String json= mapper.writeValueAsString(registr);
@@ -70,7 +68,6 @@ public class Application {
 	}
 	
 	public void registr2(User user) throws ClientProtocolException, IOException{
-		HttpClient httpClient = HttpClientBuilder.create().build();
 		HttpPost httpPostRequest = new HttpPost("http://localhost:8080/registration/person");
 		ObjectMapper mapper = new ObjectMapper();
 		String json= mapper.writeValueAsString(user);
@@ -83,7 +80,6 @@ public class Application {
 	}
 	
 	public HttpEntity login(LoginDTO login) throws ClientProtocolException, IOException{
-		HttpClient httpClient = HttpClientBuilder.create().build();
 		HttpPost httpPostRequest = new HttpPost("http://localhost:8080/login");
 		ObjectMapper mapper = new ObjectMapper();
 		String json= mapper.writeValueAsString(login);
@@ -123,7 +119,6 @@ public class Application {
 		
 	}
 	public void reserve(ReserveDTO reserv) throws JsonGenerationException, JsonMappingException, IOException{
-		HttpClient httpClient = HttpClientBuilder.create().build();
 		HttpPost httpPostRequest = new HttpPost("http://localhost:8080/reservation/create");
 		ObjectMapper mapper = new ObjectMapper();
 		String json= mapper.writeValueAsString(reserv);
