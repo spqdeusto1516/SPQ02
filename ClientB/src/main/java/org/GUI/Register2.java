@@ -6,11 +6,16 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
 
+import org.ClientP.Application;
+import org.apache.http.client.ClientProtocolException;
 import org.models.User;
 
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
@@ -32,16 +37,15 @@ public class Register2 extends JFrame implements ActionListener {
 	private JTextField countrycode;
 	public static User newUser;
 	private JButton btnexit, btnConfirm;
-	public static User j = null;
 	private JLabel lblPhone;
 	private JTextField phone;
-	private JTextField password;
+	private JPasswordField password;
 	private JDatePickerImpl datePicker;
 	private UtilDateModel model;
 	private JDatePanelImpl datePanel;
 
 	public Register2() {
-		newUser = new User();
+		
 
 
 		BackgroundLogin background = new BackgroundLogin();
@@ -73,19 +77,16 @@ public class Register2 extends JFrame implements ActionListener {
 
 			@Override
 			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub
-
+				
 			}
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-				// TODO Auto-generated method stub
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 					btnConfirm.doClick();
 				}
@@ -130,7 +131,7 @@ public class Register2 extends JFrame implements ActionListener {
 		lblPassword.setBounds(232, 375, 272, 81);
 		background.add(lblPassword);
 		
-		password = new JTextField();
+		password = new JPasswordField();
 		password.setForeground(Color.BLACK);
 		password.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		password.setBounds(596, 412, 249, 32);
@@ -170,7 +171,24 @@ public class Register2 extends JFrame implements ActionListener {
 		if (botonPulsado == btnexit) {
 			System.exit(0);
 		} else if (botonPulsado == btnConfirm) {
-			String u = countrycode.getText();
+			
+			Register.newUser.setBirthDate(datePicker.getJFormattedTextField().getText());
+			Register.newUser.setCountryCode(countrycode.getText());
+			Register.newUser.setPassword(password.getText());
+			Register.newUser.setPhone(Integer.parseInt(phone.getText()));
+//			System.out.println(Register.newUser.getBirthDate());
+//			System.out.println(Register.newUser.getCountryCode());
+//			System.out.println(Register.newUser.getPassword());
+//			System.out.println(Register.newUser.getPhone());
+//			System.out.println(Register.newUser.getEmail());
+			Application app = new Application();
+			try {
+				app.registr2(Register.newUser);
+			} catch (ClientProtocolException e1) {
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 
 					
 		} 

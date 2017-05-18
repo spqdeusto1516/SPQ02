@@ -7,11 +7,16 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
+import org.ClientP.Application;
+import org.apache.http.client.ClientProtocolException;
+import org.dtos.RegistrDTO;
 import org.models.User;
 
 import javax.swing.JTextField;
@@ -156,13 +161,30 @@ public class Register extends JFrame implements ActionListener {
 						JOptionPane.showMessageDialog(null,
 								"You have to complete everything!", "ERROR",
 								JOptionPane.ERROR_MESSAGE);
-					} else if (!name.getText().equals("")){
+					} else {
 						JOptionPane.showMessageDialog(null,
 								"We have sent a confirmation email to your email address, please confirm your account.", "Information",
 								JOptionPane.INFORMATION_MESSAGE);
+						Application app = new Application();
+						RegistrDTO registr=new RegistrDTO();
+						registr.setFirstname(name.getText());
+						registr.setLastname(surname.getText());
+						registr.setEmail(email.getText());
+						newUser.setEmail(email.getText());
+						newUser.setFirstname(name.getText());
+						newUser.setLastname(surname.getText());
+						try {
+							app.registr1(registr);
+						} catch (ClientProtocolException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 						this.dispose();
+						Register2 rg2=new Register2();
 						
-					//Introduce in the database the new user and he/she should log in in the previous window
 				} 
 			
 		} 
