@@ -11,7 +11,7 @@ public class User {
 	private String firstname;
 	private String lastname;
 	private String email;
-	private long birthDate;
+	private String birthDate;
 	private String countryCode;
 	private int phone;
 	private String password;
@@ -21,7 +21,7 @@ public class User {
     public User(){
     	
     }
-    public User(String email, long birthDate, String countryCode, int phone, String password, Address address){
+    public User(String email, String birthDate, String countryCode, int phone, String password, Address address){
     	this.email = email;
     	this.birthDate = birthDate;
     	this.countryCode = countryCode;
@@ -53,10 +53,10 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public long getBirthDate() {
+	public String getBirthDate() {
 		return birthDate;
 	}
-	public void setBirthDate(long birthDate) {
+	public void setBirthDate(String birthDate) {
 		this.birthDate = birthDate;
 	}
 	public String getCountryCode() {

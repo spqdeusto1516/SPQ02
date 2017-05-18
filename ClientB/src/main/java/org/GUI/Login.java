@@ -189,10 +189,14 @@ public class Login extends JFrame implements ActionListener {
 
 class BackgroundLogin extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public void paintComponent(Graphics g) {
 		Dimension tamaño = getSize();
-		ImageIcon imagenFondo = new ImageIcon(new ImageIcon(getClass()
-				.getResource("/images/background.jpg")).getImage());
+		ImageIcon imagenFondo = new ImageIcon(new ImageIcon(getClass().getResource("/images/background.jpg")).getImage());
 		g.drawImage(imagenFondo.getImage(), 0, 0, tamaño.width, tamaño.height,
 				null);
 
