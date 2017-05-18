@@ -43,6 +43,13 @@ public class Register2 extends JFrame implements ActionListener {
 	private JDatePickerImpl datePicker;
 	private UtilDateModel model;
 	private JDatePanelImpl datePanel;
+	private JLabel lblCountryName;
+	private JTextField countryName;
+	private JTextField postalCode;
+	private JTextField textField;
+	private JTextField street;
+	private JTextField houseNumber;
+	private JTextField apartmentNumber;
 
 	public Register2() {
 		
@@ -55,22 +62,22 @@ public class Register2 extends JFrame implements ActionListener {
 		model = new UtilDateModel();
 		datePanel = new JDatePanelImpl(model);
 		datePicker = new JDatePickerImpl(datePanel);
-		datePicker.setBounds(596, 200, 249, 25);
+		datePicker.setBounds(545, 68, 249, 25);
 		background.add(datePicker);
 		
 		
 		JLabel lblCountryCode = new JLabel("Country Code");
 		lblCountryCode.setBackground(new Color(240, 240, 240));
-		lblCountryCode.setFont(new Font("Century Schoolbook", Font.PLAIN, 50));
+		lblCountryCode.setFont(new Font("Century Schoolbook", Font.PLAIN, 40));
 		lblCountryCode.setForeground(Color.WHITE);
 		lblCountryCode.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCountryCode.setBounds(124, 81, 377, 81);
+		lblCountryCode.setBounds(146, 150, 267, 63);
 		background.add(lblCountryCode);
 
 		countrycode = new JTextField();
 		countrycode.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		countrycode.setForeground(Color.BLACK);
-		countrycode.setBounds(596, 118, 249, 32);
+		countrycode.setBounds(460, 168, 69, 31);
 
 		background.add(countrycode);
 		KeyListener keylistener = new KeyListener() {
@@ -98,7 +105,7 @@ public class Register2 extends JFrame implements ActionListener {
 		btnConfirm.setForeground(Color.WHITE);
 		btnConfirm.addActionListener(this);
 		btnConfirm.setFont(new Font("Yu Gothic Light", Font.PLAIN, 50));
-		btnConfirm.setBounds(406, 508, 340, 92);
+		btnConfirm.setBounds(404, 532, 340, 92);
 		btnConfirm.requestFocus();
 		background.add(btnConfirm);
 
@@ -114,13 +121,13 @@ public class Register2 extends JFrame implements ActionListener {
 		lblPhone.setForeground(Color.WHITE);
 		lblPhone.setFont(new Font("Century Schoolbook", Font.PLAIN, 50));
 		lblPhone.setBackground(SystemColor.menu);
-		lblPhone.setBounds(114, 272, 387, 81);
+		lblPhone.setBounds(124, 376, 387, 81);
 		background.add(lblPhone);
 		
 		phone = new JTextField();
 		phone.setForeground(Color.BLACK);
 		phone.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		phone.setBounds(596, 309, 249, 32);
+		phone.setBounds(597, 413, 249, 32);
 		background.add(phone);
 		
 		JLabel lblPassword = new JLabel("Password");
@@ -128,13 +135,13 @@ public class Register2 extends JFrame implements ActionListener {
 		lblPassword.setForeground(Color.WHITE);
 		lblPassword.setFont(new Font("Century Schoolbook", Font.PLAIN, 50));
 		lblPassword.setBackground(SystemColor.menu);
-		lblPassword.setBounds(232, 375, 272, 81);
+		lblPassword.setBounds(195, 438, 272, 81);
 		background.add(lblPassword);
 		
 		password = new JPasswordField();
 		password.setForeground(Color.BLACK);
 		password.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		password.setBounds(596, 412, 249, 32);
+		password.setBounds(597, 475, 249, 32);
 		background.add(password);
 		
 		JLabel lblBirthDate = new JLabel("Birth date");
@@ -142,8 +149,92 @@ public class Register2 extends JFrame implements ActionListener {
 		lblBirthDate.setForeground(Color.WHITE);
 		lblBirthDate.setFont(new Font("Century Schoolbook", Font.PLAIN, 50));
 		lblBirthDate.setBackground(SystemColor.menu);
-		lblBirthDate.setBounds(124, 173, 377, 81);
+		lblBirthDate.setBounds(251, 32, 282, 81);
 		background.add(lblBirthDate);
+		
+		lblCountryName = new JLabel("Country Name");
+		lblCountryName.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCountryName.setForeground(Color.WHITE);
+		lblCountryName.setFont(new Font("Century Schoolbook", Font.PLAIN, 40));
+		lblCountryName.setBackground(SystemColor.menu);
+		lblCountryName.setBounds(580, 149, 282, 63);
+		background.add(lblCountryName);
+		
+		countryName = new JTextField();
+		countryName.setForeground(Color.BLACK);
+		countryName.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		countryName.setBounds(875, 168, 166, 31);
+		background.add(countryName);
+		
+		JLabel lblCity = new JLabel("City");
+		lblCity.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCity.setForeground(Color.WHITE);
+		lblCity.setFont(new Font("Century Schoolbook", Font.PLAIN, 40));
+		lblCity.setBackground(SystemColor.menu);
+		lblCity.setBounds(156, 216, 267, 63);
+		background.add(lblCity);
+		
+		JLabel lblPostalCode = new JLabel("Postal code");
+		lblPostalCode.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPostalCode.setForeground(Color.WHITE);
+		lblPostalCode.setFont(new Font("Century Schoolbook", Font.PLAIN, 40));
+		lblPostalCode.setBackground(SystemColor.menu);
+		lblPostalCode.setBounds(590, 216, 267, 63);
+		background.add(lblPostalCode);
+		
+		postalCode = new JTextField();
+		postalCode.setForeground(Color.BLACK);
+		postalCode.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		postalCode.setBounds(925, 240, 69, 31);
+		background.add(postalCode);
+		
+		textField = new JTextField();
+		textField.setForeground(Color.BLACK);
+		textField.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		textField.setBounds(435, 240, 115, 31);
+		background.add(textField);
+		
+		JLabel lblStreet = new JLabel("Street");
+		lblStreet.setHorizontalAlignment(SwingConstants.CENTER);
+		lblStreet.setForeground(Color.WHITE);
+		lblStreet.setFont(new Font("Century Schoolbook", Font.PLAIN, 40));
+		lblStreet.setBackground(SystemColor.menu);
+		lblStreet.setBounds(166, 273, 267, 63);
+		background.add(lblStreet);
+		
+		street = new JTextField();
+		street.setForeground(Color.BLACK);
+		street.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		street.setBounds(460, 290, 69, 31);
+		background.add(street);
+		
+		JLabel lblHouseNumber = new JLabel("House number");
+		lblHouseNumber.setHorizontalAlignment(SwingConstants.CENTER);
+		lblHouseNumber.setForeground(Color.WHITE);
+		lblHouseNumber.setFont(new Font("Century Schoolbook", Font.PLAIN, 40));
+		lblHouseNumber.setBackground(SystemColor.menu);
+		lblHouseNumber.setBounds(597, 273, 272, 63);
+		background.add(lblHouseNumber);
+		
+		houseNumber = new JTextField();
+		houseNumber.setForeground(Color.BLACK);
+		houseNumber.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		houseNumber.setBounds(925, 297, 69, 31);
+		background.add(houseNumber);
+		
+		JLabel lblApartmentNumber = new JLabel("Apartment number");
+		lblApartmentNumber.setHorizontalAlignment(SwingConstants.CENTER);
+		lblApartmentNumber.setForeground(Color.WHITE);
+		lblApartmentNumber.setFont(new Font("Century Schoolbook", Font.PLAIN, 40));
+		lblApartmentNumber.setBackground(SystemColor.menu);
+		lblApartmentNumber.setBounds(279, 337, 423, 63);
+		background.add(lblApartmentNumber);
+		
+		apartmentNumber = new JTextField();
+		apartmentNumber.setForeground(Color.BLACK);
+		apartmentNumber.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		apartmentNumber.setBounds(714, 361, 69, 31);
+		background.add(apartmentNumber);
 		btnexit.addActionListener(this);
 
 		this.setSize(1200, 800);
