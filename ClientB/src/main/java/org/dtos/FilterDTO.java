@@ -11,7 +11,13 @@ public class FilterDTO {
     private Long reserveDate;
     private Long reserveExpire;
 
-    public Long getReserveDate() {
+    
+    
+    public FilterDTO() {
+		super();
+	}
+
+	public Long getReserveDate() {
         return reserveDate;
     }
 

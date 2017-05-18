@@ -64,6 +64,8 @@ public class Booking extends JFrame implements ActionListener {
 	private JLabel lblUsername;
 	private Application app;
 	private ArrayList<Book> books;
+	private JComboBox filtered;
+	private DefaultTableModel dtm;
 
 	public Booking() throws ClientProtocolException, IOException {
 		newUser = new User();
@@ -117,7 +119,7 @@ public class Booking extends JFrame implements ActionListener {
 		       return false;
 		    }
 		});
-		DefaultTableModel dtm = (DefaultTableModel) table.getModel();
+		dtm = (DefaultTableModel) table.getModel();
 		String titles [] = {"ID","Title","Author Name", "Author Surname", "Genre", "Description","Published date","Pages","Age limit","Amount"};
 		for (int i = 0; i < titles.length; i++) {
 			dtm.addColumn(titles[i]);
@@ -152,10 +154,10 @@ public class Booking extends JFrame implements ActionListener {
 		lblBy.setBounds(743, 27, 66, 40);
 		background.add(lblBy);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"Title", "Author", "Genre", "Ranking"}));
-		comboBox_1.setBounds(743, 80, 174, 40);
-		background.add(comboBox_1);
+		filtered = new JComboBox();
+		filtered.setModel(new DefaultComboBoxModel(new String[] {"Title", "Author", "Genre", "Ranking"}));
+		filtered.setBounds(743, 80, 174, 40);
+		background.add(filtered);
 		
 		JLabel lblFrom = new JLabel("From");
 		lblFrom.setForeground(Color.WHITE);
@@ -197,7 +199,12 @@ public class Booking extends JFrame implements ActionListener {
 		this.setVisible(true);
 	}
 
-
+	private void ClearTable(){
+	       for (int i = 0; i < table.getRowCount(); i++) {
+	           dtm.removeRow(i);
+	           i-=1;
+	       }
+	   }
 
 	public static void main(String[] args) throws ClientProtocolException, IOException {
 		Booking x = new Booking();
@@ -212,6 +219,31 @@ public class Booking extends JFrame implements ActionListener {
 		if (botonPulsado == btnexit) {
 			System.exit(0);
 		} else if (botonPulsado == btnFind) {
+			ClearTable();
+			FilterDTO filter=new FilterDTO();
+			if (filtered.getSelectedIndex()==0) {//by title
+				filter.setTitle(tfSearch.getText());
+			} else if(filtered.getSelectedIndex()==1){//by author (not implemented yet)
+				//filter.setAuthor(tfSearch.getText());
+			} else if(filtered.getSelectedIndex()==2){//by genre
+				filter.setGenre(tfSearch.getText());
+			}//ranking not implemented yet
+			
+			try {
+				ArrayList<Book> books2 = app.getBooks(app.getBooksFilter(filter));
+				for (int i = 0; i <books2.size(); i++) {
+					Book book2 = books2.get(i);
+					
+					String fila [] = {book2.getId(),book2.getTitle(),book2.getAuthorFirstName(),book2.getAuthorLastName(), book2.getGenre(), book2.getDescription(), Long.toString(book2.getPublishDate()), Integer.toString(book2.getPages()), Integer.toString(book2.getAgeLimit()), Integer.toString(book2.getCount()) };
+						dtm.addRow(fila);
+				}
+			} catch (ClientProtocolException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			
 			btnBook.setVisible(true);
 			} else if (botonPulsado== btnBook){
