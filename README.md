@@ -1,6 +1,15 @@
 Our amazing team decided to create a booking aplication for reserving books in a library. In order to achieve succes and to reach our goal, we have used the following technologies: <br />
 
-### For the server side:
+### Prerequisites:
+<ul> 
+	<li>Intellij IDEA or Eclipse developement environments</li>
+	<li>docker</li>
+	<li>mongo db </li>
+</ul>
+
+If you want to run the application in Intellij IDEA make sure you configure it as a SpringBoot application.
+
+### For the server side
 SPRING Boot framework <br />
 <img src="images/springboot.png" />
 <br />
