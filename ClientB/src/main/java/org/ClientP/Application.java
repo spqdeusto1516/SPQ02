@@ -8,6 +8,7 @@ import org.models.Address;
 import org.models.Book;
 import org.models.Token;
 import org.models.User;
+import org.security.SecurityUser;
 import org.security.TokenUtils;
 
 import com.mongodb.util.JSON;
@@ -79,16 +80,40 @@ public class Application {
 	    httpClient.execute(httpPostRequest);
 	}
 	
-	public HttpEntity login(LoginDTO login) throws ClientProtocolException, IOException{
+	public Boolean login(LoginDTO login){
 		HttpPost httpPostRequest = new HttpPost("http://localhost:8080/login");
 		ObjectMapper mapper = new ObjectMapper();
-		String json= mapper.writeValueAsString(login);
-		System.out.println(json);
-		StringEntity entity = new StringEntity(json);
-		httpPostRequest.setEntity(entity);
-	    httpPostRequest.setHeader("Accept", "application/json");
-	    httpPostRequest.setHeader("Content-type", "application/json");
-	    return httpClient.execute(httpPostRequest).getEntity();
+		String json;
+		try {
+			json = mapper.writeValueAsString(login);
+			System.out.println(json);
+			StringEntity entity = new StringEntity(json);
+			httpPostRequest.setEntity(entity);
+		    httpPostRequest.setHeader("Accept", "application/json");
+		    httpPostRequest.setHeader("Content-type", "application/json");
+		    Token token;
+			try {
+				token = getToken(httpClient.execute(httpPostRequest).getEntity());
+				return true;
+			} catch (ClientProtocolException e) {
+				return false;
+				// TODO Auto-generated catch block
+			} catch (IOException e) {
+				return false;
+				// TODO Auto-generated catch block
+			}
+		} catch (JsonGenerationException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (JsonMappingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return false;
+	
 	}
 	
 	public Token getToken(HttpEntity entity) throws IOException{
@@ -178,7 +203,7 @@ public class Application {
 		LoginDTO login = new LoginDTO();
 		login.setEmail("ander.areizagab@opendeusto.es");
 		login.setEncryptedPassword("1234");
-		HttpEntity entity3 = app.login(login);
+		System.out.println(app.login(login));
 //		Token token = app.getToken(entity3);
 //		TokenUtils tk = new TokenUtils();
 	}

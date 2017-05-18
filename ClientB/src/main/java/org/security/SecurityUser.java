@@ -17,7 +17,10 @@ public class SecurityUser implements UserDetails {
     private Boolean accountNonLocked = true;
     private Boolean credentialsNonExpired = true;
     private Boolean enabled = true;
-
+    public SecurityUser(String email, String password){
+    	this.setEmail(email);
+    	this.setPassword(password);
+    }
     public SecurityUser(String id, String password, String email, Date lastPasswordReset, Collection<? extends GrantedAuthority> authorities) {
         this.setId(id);
         this.setPassword(password);

@@ -10,7 +10,19 @@ public class LoginDTO {
     @NotEmpty
     private String encryptedPassword;
 
-    public String getEmail() {
+    
+    
+    public LoginDTO() {
+		super();
+	}
+
+	public LoginDTO(String email, String encryptedPassword) {
+		super();
+		this.email = email;
+		this.encryptedPassword = encryptedPassword;
+	}
+
+	public String getEmail() {
         return email;
     }
 
