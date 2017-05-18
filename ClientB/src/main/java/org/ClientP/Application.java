@@ -94,6 +94,8 @@ public class Application {
 		    Token token;
 			try {
 				token = getToken(httpClient.execute(httpPostRequest).getEntity());
+				TokenUtils tUtils = new TokenUtils();
+				System.out.println(tUtils.getUsernameFromToken(token.getToken()));
 				return true;
 			} catch (ClientProtocolException e) {
 				return false;
@@ -185,14 +187,14 @@ public class Application {
 	public final static void main(String[] args) throws ClientProtocolException, IOException  {
 		Application app = new Application();
 		HttpEntity entity = app.startConnectionGet("http://localhost:8080/book");
-		ArrayList<Book> books = app.getBooks(entity);
-		System.out.println(books.get(0).getTags().get(0));
-		System.out.println(books.get(0).getId());
-		FilterDTO filter = new FilterDTO();
-		filter.setTitle("hello");
-		HttpEntity entity2 = app.getBooksFilter(filter);
-		app.getBooks(entity2);
-		RegistrDTO registr = new RegistrDTO();
+//		ArrayList<Book> books = app.getBooks(entity);
+//		System.out.println(books.get(0).getTags().get(0));
+//		System.out.println(books.get(0).getId());
+//		FilterDTO filter = new FilterDTO();
+//		filter.setTitle("hello");
+//		HttpEntity entity2 = app.getBooksFilter(filter);
+//		app.getBooks(entity2);
+//		RegistrDTO registr = new RegistrDTO();
 //		registr.setEmail("anderareizaga1996@gmail.com");
 //		registr.setFirstname("Ander");
 //		registr.setLastname("Areizaga");
