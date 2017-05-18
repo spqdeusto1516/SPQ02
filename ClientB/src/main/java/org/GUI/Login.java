@@ -3,6 +3,7 @@ package org.GUI;
 
 import java.awt.BorderLayout;
 
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -20,10 +21,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 
+import org.ClientP.Application;
 import org.apache.http.client.ClientProtocolException;
+import org.dtos.LoginDTO;
 import org.models.*;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -42,7 +44,7 @@ public class Login extends JFrame implements ActionListener {
 	public static User newUser;
 	private JButton btnexit, btnLogIn;
 	private JLabel lblPassword;
-	private JTextField password;
+	private JPasswordField password;
 
 	public Login() {
 		newUser = new User();
@@ -113,7 +115,7 @@ public class Login extends JFrame implements ActionListener {
 		lblPassword.setBounds(229, 342, 272, 125);
 		background.add(lblPassword);
 		
-		password = new JTextField();
+		password = new JPasswordField();
 		password.setForeground(Color.BLACK);
 		password.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		password.setBounds(596, 394, 249, 32);
@@ -150,6 +152,7 @@ public class Login extends JFrame implements ActionListener {
 		Login x = new Login();
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton botonPulsado = (JButton) e.getSource();
@@ -164,7 +167,19 @@ public class Login extends JFrame implements ActionListener {
 							JOptionPane.ERROR_MESSAGE);
 				} else {
 					this.dispose();
-					//Here we have to see if the user is in the database and if it is login and if not suggest to register
+					LoginDTO login=new LoginDTO();
+					login.setEmail(email.getText());
+					login.setEncryptedPassword(password.getText());
+					Application app = new Application();
+					try {
+						app.login(login);
+					} catch (ClientProtocolException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					} catch (IOException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
 					try {
 						Booking b= new Booking();
 					} catch (ClientProtocolException e1) {
