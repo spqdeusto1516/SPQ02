@@ -171,23 +171,16 @@ public class Login extends JFrame implements ActionListener {
 					login.setEmail(email.getText());
 					login.setEncryptedPassword(password.getText());
 					Application app = new Application();
-					try {
-						app.login(login);
-					} catch (ClientProtocolException e2) {
-						// TODO Auto-generated catch block
-						e2.printStackTrace();
-					} catch (IOException e2) {
-						// TODO Auto-generated catch block
-						e2.printStackTrace();
-					}
-					try {
-						Booking b= new Booking();
-					} catch (ClientProtocolException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+					if(app.login(login)){
+						try {
+							Booking b= new Booking();
+						} catch (ClientProtocolException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}
 				} 
 		} 
