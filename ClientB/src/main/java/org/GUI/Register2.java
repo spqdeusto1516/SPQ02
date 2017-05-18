@@ -7,6 +7,9 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,6 +19,7 @@ import javax.swing.SwingConstants;
 
 import org.ClientP.Application;
 import org.apache.http.client.ClientProtocolException;
+import org.models.Address;
 import org.models.User;
 
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
@@ -171,11 +175,25 @@ public class Register2 extends JFrame implements ActionListener {
 		if (botonPulsado == btnexit) {
 			System.exit(0);
 		} else if (botonPulsado == btnConfirm) {
+			String birthDate = datePicker.getJFormattedTextField().getText();
+			SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
+			Date date;
 			
-			Register.newUser.setBirthDate(datePicker.getJFormattedTextField().getText());
+			try {
+				date = (Date)formatter.parse(birthDate);
+				long mills = date.getTime();
+				Register.newUser.setBirthDate(mills);
+			} catch (ParseException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+			
 			Register.newUser.setCountryCode(countrycode.getText());
 			Register.newUser.setPassword(password.getText());
 			Register.newUser.setPhone(Integer.parseInt(phone.getText()));
+			Address adr = new Address();
+			adr.setStreet("hola");
+			Register.newUser.setAddress(adr);
 //			System.out.println(Register.newUser.getBirthDate());
 //			System.out.println(Register.newUser.getCountryCode());
 //			System.out.println(Register.newUser.getPassword());
