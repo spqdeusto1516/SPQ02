@@ -181,6 +181,10 @@ public class Login extends JFrame implements ActionListener {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
+					} else{
+						JOptionPane.showMessageDialog(null,
+								"User not found, please enter a valid credentials", "Information",
+								JOptionPane.INFORMATION_MESSAGE);
 					}
 				} 
 		} 

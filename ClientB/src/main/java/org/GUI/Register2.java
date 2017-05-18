@@ -50,7 +50,7 @@ public class Register2 extends JFrame implements ActionListener {
 	private JLabel lblCountryName;
 	private JTextField countryName;
 	private JTextField postalCode;
-	private JTextField textField;
+	private JTextField city;
 	private JTextField street;
 	private JTextField houseNumber;
 	private JTextField apartmentNumber;
@@ -192,11 +192,11 @@ public class Register2 extends JFrame implements ActionListener {
 		postalCode.setBounds(925, 240, 69, 31);
 		background.add(postalCode);
 		
-		textField = new JTextField();
-		textField.setForeground(Color.BLACK);
-		textField.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		textField.setBounds(435, 240, 115, 31);
-		background.add(textField);
+		city = new JTextField();
+		city.setForeground(Color.BLACK);
+		city.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		city.setBounds(435, 240, 115, 31);
+		background.add(city);
 		
 		JLabel lblStreet = new JLabel("Street");
 		lblStreet.setHorizontalAlignment(SwingConstants.CENTER);
@@ -283,7 +283,12 @@ public class Register2 extends JFrame implements ActionListener {
 			Register.newUser.setPassword(password.getText());
 			Register.newUser.setPhone(Integer.parseInt(phone.getText()));
 			Address adr = new Address();
-			adr.setStreet("hola");
+			adr.setStreet(street.getText());
+			adr.setApartamentNumber(Integer.parseInt(apartmentNumber.getText()));
+			adr.setCity(city.getText());
+			adr.setCountry(countryName.getText());
+			adr.setHouseNumber(Integer.parseInt(houseNumber.getText()));
+			adr.setPostalCode(postalCode.getText());
 			Register.newUser.setAddress(adr);
 //			System.out.println(Register.newUser.getBirthDate());
 //			System.out.println(Register.newUser.getCountryCode());
