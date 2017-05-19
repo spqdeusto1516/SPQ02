@@ -1,11 +1,6 @@
 package org.models;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-@Document(collection = "registrs")
 public class Registr {
-    @Id
     private String id;
     private String firstname;
     private String lastname;

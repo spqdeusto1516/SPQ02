@@ -1,12 +1,6 @@
 package org.models;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-@Document(collection = "bookit_users")
 public class User {
-	@Id
 	private String id;
 	private String firstname;
 	private String lastname;
@@ -15,8 +9,6 @@ public class User {
 	private String countryCode;
 	private int phone;
 	private String password;
-
-    @DBRef(lazy = true)
     private Address address;
     public User(){
     	

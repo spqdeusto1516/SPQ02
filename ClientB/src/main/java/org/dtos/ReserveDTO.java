@@ -7,9 +7,12 @@ public class ReserveDTO {
     
 
     public ReserveDTO(String bookId) {
-		super();
 		this.bookId = bookId;
 	}
+
+	public ReserveDTO() {
+
+    }
 
 	public String getBookId() {
         return bookId;
