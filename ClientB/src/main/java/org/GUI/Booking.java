@@ -174,7 +174,7 @@ public class Booking extends JFrame implements ActionListener {
 		background.add(lblTo);
 		
 		lblUsername = new JLabel("");
-		lblUsername.setText(Register.newUser.getFirstname());
+		//lblUsername.setText(Register.newUser.getFirstname());
 		lblUsername.setForeground(Color.WHITE);
 		lblUsername.setFont(new Font("Tw Cen MT Condensed", Font.BOLD, 37));
 		lblUsername.setBackground(new Color(240, 255, 240));
@@ -247,7 +247,7 @@ public class Booking extends JFrame implements ActionListener {
 			
 			
 			} else if (botonPulsado== btnBook){
-				String bookID=books.get(table.getSelectedRow()-1).getId();
+				String bookID=books.get(table.getSelectedRow()).getId();
 				ReserveDTO reservation=new ReserveDTO(bookID);
 				try {
 					app.reserve(reservation);
