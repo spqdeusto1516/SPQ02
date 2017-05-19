@@ -26,7 +26,7 @@ public class BookService {
     }
 
     public List<Book> findAllByAuthorFirstName(String firstName) {
-        return bRepository.findAllByAuthorLastName(firstName);
+        return bRepository.findAllByAuthorFirstName(firstName);
     }
 
     public List<Book> findByGenre(String genre) {

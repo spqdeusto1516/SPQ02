@@ -24,6 +24,7 @@ import org.ClientP.Application;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
 import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.models.Book;
 import org.models.User;
@@ -59,13 +60,15 @@ public class Booking extends JFrame implements ActionListener {
 	private JTable table;
 	private JScrollPane scrollTable;
 	private JButton btnFind;
-	private JButton btnBook;
+	private JButton btnBook, btnShowAll;
 	private JLabel lblBy;
 	private JLabel lblUsername;
 	private Application app;
 	private ArrayList<Book> books;
 	private JComboBox filtered;
 	private DefaultTableModel dtm;
+	private HttpEntity entity;
+	private String[] titles;
 
 	public Booking() throws ClientProtocolException, IOException {
 		newUser = new User();
@@ -120,13 +123,13 @@ public class Booking extends JFrame implements ActionListener {
 		    }
 		});
 		dtm = (DefaultTableModel) table.getModel();
-		String titles [] = {"ID","Title","Author Name", "Author Surname", "Genre", "Description","Published date","Pages","Age limit","Amount"};
+		titles = new String[]{"ID","Title","Author Name", "Author Surname", "Genre", "Description","Published date","Pages","Age limit","Amount"};
 		for (int i = 0; i < titles.length; i++) {
 			dtm.addColumn(titles[i]);
 		}
 		dtm.addRow(titles);
 		app = new Application();
-		HttpEntity entity = app.startConnectionGet("http://localhost:8080/book");
+		entity = app.startConnectionGet("http://localhost:8080/book");
 		books = app.getBooks(entity);
 		
 		//books.add(new Book("1212", "Romeo y Julieta","William", "Shakespeare","Drama", "They die", 2012190383 , 300, 13, 7));
@@ -155,7 +158,7 @@ public class Booking extends JFrame implements ActionListener {
 		background.add(lblBy);
 		
 		filtered = new JComboBox();
-		filtered.setModel(new DefaultComboBoxModel(new String[] {"Title", "Author", "Genre", "Ranking"}));
+		filtered.setModel(new DefaultComboBoxModel(new String[] {"Title", "Author Name","Author Surname", "Genre", "Ranking"}));
 		filtered.setBounds(743, 80, 174, 40);
 		background.add(filtered);
 		
@@ -181,8 +184,16 @@ public class Booking extends JFrame implements ActionListener {
 		lblUsername.setBounds(934, 27, 248, 50);
 		background.add(lblUsername);
 		
+		btnShowAll = new JButton("Show all");
+		btnShowAll.setForeground(Color.WHITE);
+		btnShowAll.setFont(new Font("Tw Cen MT Condensed Extra Bold", Font.PLAIN, 34));
+		btnShowAll.setBackground(Color.BLACK);
+		btnShowAll.setBounds(999, 250, 183, 68);
+		background.add(btnShowAll);
+		
 		table.setVisible(true);
 		btnBook.setVisible(true);
+		btnShowAll.setVisible(false);
 		btnexit.addActionListener(this);
 		btnFind.addActionListener(this);
 		btnBook.addActionListener(this);
@@ -218,18 +229,32 @@ public class Booking extends JFrame implements ActionListener {
 
 		if (botonPulsado == btnexit) {
 			System.exit(0);
-		} else if (botonPulsado == btnFind) {
+		} else if (botonPulsado == btnShowAll){
+			dtm.addRow(titles);
+			for (int i = 0; i <books.size(); i++) {
+				Book book = books.get(i);
+				
+				String fila [] = {book.getId(),book.getTitle(),book.getAuthorFirstName(),book.getAuthorLastName(), book.getGenre(), book.getDescription(), Long.toString(book.getPublishDate()), Integer.toString(book.getPages()), Integer.toString(book.getAgeLimit()), Integer.toString(book.getCount()) };
+					dtm.addRow(fila);
+			}
+		}else if (botonPulsado == btnFind) {
+			btnShowAll.setVisible(true);
 			ClearTable();
 			FilterDTO filter=new FilterDTO();
 			if (filtered.getSelectedIndex()==0) {//by title
 				filter.setTitle(tfSearch.getText());
-			} else if(filtered.getSelectedIndex()==1){//by author (not implemented yet)
-				//filter.setAuthor(tfSearch.getText());
-			} else if(filtered.getSelectedIndex()==2){//by genre
+			} else if(filtered.getSelectedIndex()==1){//by author 
+				filter.setAuthorName(tfSearch.getText());
+			} else if(filtered.getSelectedIndex()==2) {
+				filter.setAuthorSurname(tfSearch.getText());
+			} else if(filtered.getSelectedIndex()==3){//by genre
 				filter.setGenre(tfSearch.getText());
-			}//ranking not implemented yet
+			} else if(filtered.getSelectedIndex()==4){//by ranking
+				//RANKING
+			}
 			
 			try {
+				dtm.addRow(titles);
 				ArrayList<Book> books2 = app.getBooks(app.getBooksFilter(filter));
 				for (int i = 0; i <books2.size(); i++) {
 					Book book2 = books2.get(i);

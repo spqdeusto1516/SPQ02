@@ -54,6 +54,14 @@ public class BookController {
             set.addAll(bookService.findByTitle(filterDTO.getTitle()));
         }
 
+        if(filterDTO.getAuthorName() != null) {
+            set.addAll(bookService.findAllByAuthorFirstName(filterDTO.getTitle()));
+        }
+        
+        if(filterDTO.getAuthorSurname() != null) {
+            set.addAll(bookService.findByAuthorLastName(filterDTO.getTitle()));
+        }
+        
         if (filterDTO.getGenre() != null) {
             set.addAll(bookService.findByGenre(filterDTO.getTitle()));
         }

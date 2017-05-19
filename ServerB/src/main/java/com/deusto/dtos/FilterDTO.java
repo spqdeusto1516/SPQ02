@@ -7,11 +7,32 @@ public class FilterDTO {
 
     private String title;
     protected String genre;
-    // implement for author
+    private String authorName;
+    private String authorSurname;
     private Long reserveDate;
     private Long reserveExpire;
 
-    public Long getReserveDate() {
+    
+    
+    
+    
+    public String getAuthorSurname() {
+		return authorSurname;
+	}
+
+	public void setAuthorSurname(String authorSurname) {
+		this.authorSurname = authorSurname;
+	}
+
+	public String getAuthorName() {
+		return authorName;
+	}
+
+	public void setAuthorName(String authorName) {
+		this.authorName = authorName;
+	}
+
+	public Long getReserveDate() {
         return reserveDate;
     }
 

@@ -266,45 +266,54 @@ public class Register2 extends JFrame implements ActionListener {
 		if (botonPulsado == btnexit) {
 			System.exit(0);
 		} else if (botonPulsado == btnConfirm) {
-			String birthDate = datePicker.getJFormattedTextField().getText();
-			SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
-			Date date;
-			
-			try {
-				date = (Date)formatter.parse(birthDate);
-				long mills = date.getTime();
-				Register.newUser.setBirthDate(mills);
-			} catch (ParseException e2) {
-				// TODO Auto-generated catch block
-				e2.printStackTrace();
-			}
-			
-			Register.newUser.setCountryCode(countrycode.getText());
-			Register.newUser.setPassword(password.getText());
-			Register.newUser.setPhone(Integer.parseInt(phone.getText()));
-			Address adr = new Address();
-			adr.setStreet(street.getText());
-			adr.setApartamentNumber(Integer.parseInt(apartmentNumber.getText()));
-			adr.setCity(city.getText());
-			adr.setCountry(countryName.getText());
-			adr.setHouseNumber(Integer.parseInt(houseNumber.getText()));
-			adr.setPostalCode(postalCode.getText());
-			Register.newUser.setAddress(adr);
-//			System.out.println(Register.newUser.getBirthDate());
-//			System.out.println(Register.newUser.getCountryCode());
-//			System.out.println(Register.newUser.getPassword());
-//			System.out.println(Register.newUser.getPhone());
-//			System.out.println(Register.newUser.getEmail());
-			Application app = new Application();
-			try {
-				app.registr2(Register.newUser);
-			} catch (ClientProtocolException e1) {
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
+			if (countryName.getText().equals("")||(postalCode.getText().equals(""))||(city.getText().equals(""))||(street.getText().equals(""))||(houseNumber.getText().equals(""))||(apartmentNumber.getText().equals(""))||(postalCode.getText().equals(""))) {
+				JOptionPane.showMessageDialog(null,
+						"Plase complete all the fileds","Error",
+						JOptionPane.ERROR_MESSAGE);
 
-					
+			}	else{
+				String birthDate = datePicker.getJFormattedTextField().getText();
+				SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
+				Date date;
+
+				try {
+					date = (Date)formatter.parse(birthDate);
+					long mills = date.getTime();
+					Register.newUser.setBirthDate(mills);
+				} catch (ParseException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+
+				Register.newUser.setCountryCode(countrycode.getText());
+				Register.newUser.setPassword(password.getText());
+				Register.newUser.setPhone(Integer.parseInt(phone.getText()));
+				Address adr = new Address();
+				adr.setStreet(street.getText());
+				adr.setApartamentNumber(Integer.parseInt(apartmentNumber.getText()));
+				adr.setCity(city.getText());
+				adr.setCountry(countryName.getText());
+				adr.setHouseNumber(Integer.parseInt(houseNumber.getText()));
+				adr.setPostalCode(postalCode.getText());
+				Register.newUser.setAddress(adr);
+				//			System.out.println(Register.newUser.getBirthDate());
+				//			System.out.println(Register.newUser.getCountryCode());
+				//			System.out.println(Register.newUser.getPassword());
+				//			System.out.println(Register.newUser.getPhone());
+				//			System.out.println(Register.newUser.getEmail());
+				Application app = new Application();
+				try {
+					app.registr2(Register.newUser);
+				} catch (ClientProtocolException e1) {
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				JOptionPane.showMessageDialog(null,
+						"Registration process finished, please log in.", "Information",
+						JOptionPane.INFORMATION_MESSAGE);
+				this.dispose();
+			}
 		} 
 	}
 }
