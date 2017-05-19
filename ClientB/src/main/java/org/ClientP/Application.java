@@ -2,6 +2,7 @@ package org.ClientP;
 
 
 import java.io.*;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 import org.models.Address;
@@ -20,11 +21,15 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.dtos.*;
+import org.apache.commons.codec.binary.Base64;
 import org.apache.http.*;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -32,6 +37,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 public class Application {
 		private HttpClient httpClient = HttpClientBuilder.create().build();
+		private Token token;
 	
 	public HttpEntity startConnectionGet(String url) throws ClientProtocolException, IOException{
 		
@@ -91,11 +97,8 @@ public class Application {
 			httpPostRequest.setEntity(entity);
 		    httpPostRequest.setHeader("Accept", "application/json");
 		    httpPostRequest.setHeader("Content-type", "application/json");
-		    Token token;
 			try {
-				token = getToken(httpClient.execute(httpPostRequest).getEntity());
-				TokenUtils tUtils = new TokenUtils();
-				System.out.println(tUtils.getUsernameFromToken(token.getToken()));
+				this.token = getToken(httpClient.execute(httpPostRequest).getEntity());
 				return true;
 			} catch (ClientProtocolException e) {
 				return false;
@@ -145,15 +148,25 @@ public class Application {
 		return token;
 		
 	}
-	public void reserve(ReserveDTO reserv) throws JsonGenerationException, JsonMappingException, IOException{
+	public void reserve(ReserveDTO reserv, LoginDTO login) throws JsonGenerationException, JsonMappingException, IOException{
 		HttpPost httpPostRequest = new HttpPost("http://localhost:8080/reservation/create");
 		ObjectMapper mapper = new ObjectMapper();
 		String json= mapper.writeValueAsString(reserv);
 		System.out.println(json);
 		StringEntity entity = new StringEntity(json);
+//
+//	    httpPostRequest.setHeader("Content-type", "application/json");
+//	    httpPostRequest.setHeader("Authorization",this.token.getToken());
+
+
+		String auth = login.getEmail() + ":" + login.getEncryptedPassword();
+		byte[] encodedAuth = Base64.encodeBase64(
+		  auth.getBytes(Charset.forName("ISO-8859-1")));
+		String authHeader = "Basic " + new String(encodedAuth);
+		httpPostRequest.setHeader(HttpHeaders.AUTHORIZATION, authHeader);
+		httpPostRequest.setHeader(HttpHeaders.CONTENT_TYPE, "application/json");
 		httpPostRequest.setEntity(entity);
-	    httpPostRequest.setHeader("Accept", "application/json");
-	    httpPostRequest.setHeader("Content-type", "application/json");
+		
 	    httpClient.execute(httpPostRequest);
 	}
 	
@@ -187,9 +200,9 @@ public class Application {
 	public final static void main(String[] args) throws ClientProtocolException, IOException  {
 		Application app = new Application();
 		HttpEntity entity = app.startConnectionGet("http://localhost:8080/book");
-//		ArrayList<Book> books = app.getBooks(entity);
-//		System.out.println(books.get(0).getTags().get(0));
-//		System.out.println(books.get(0).getId());
+		ArrayList<Book> books = app.getBooks(entity);
+		System.out.println(books.get(0).getTags().get(0));
+		System.out.println(books.get(0).getId());
 //		FilterDTO filter = new FilterDTO();
 //		filter.setTitle("hello");
 //		HttpEntity entity2 = app.getBooksFilter(filter);
@@ -206,6 +219,8 @@ public class Application {
 		login.setEmail("ander.areizagab@opendeusto.es");
 		login.setEncryptedPassword("1234");
 		System.out.println(app.login(login));
+		ReserveDTO reserv = new ReserveDTO(books.get(0).getId());
+		app.reserve(reserv,login);
 //		Token token = app.getToken(entity3);
 //		TokenUtils tk = new TokenUtils();
 	}

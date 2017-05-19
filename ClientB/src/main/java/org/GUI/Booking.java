@@ -140,11 +140,11 @@ public class Booking extends JFrame implements ActionListener {
 		app = new Application();
 		entity = app.startConnectionGet("http://localhost:8080/book");
 		books = app.getBooks(entity);
-		
+		System.out.println(books.size());
 		//books.add(new Book("1212", "Romeo y Julieta","William", "Shakespeare","Drama", "They die", 2012190383 , 300, 13, 7));
 		for (int i = 0; i <books.size(); i++) {
 			Book book = books.get(i);
-			
+
 			String fila [] = {book.getId(),book.getTitle(),book.getAuthorFirstName(),book.getAuthorLastName(), book.getGenre(), book.getDescription(), Long.toString(book.getPublishDate()), Integer.toString(book.getPages()), Integer.toString(book.getAgeLimit()), Integer.toString(book.getCount()) };
 				dtm.addRow(fila);
 		}
@@ -273,7 +273,7 @@ public class Booking extends JFrame implements ActionListener {
 				ArrayList<Book> books2 = app.getBooks(app.getBooksFilter(filter));
 				for (int i = 0; i <books2.size(); i++) {
 					Book book2 = books2.get(i);
-					
+					System.out.println(book2.getId());
 					String fila [] = {book2.getId(),book2.getTitle(),book2.getAuthorFirstName(),book2.getAuthorLastName(), book2.getGenre(), book2.getDescription(), Long.toString(book2.getPublishDate()), Integer.toString(book2.getPages()), Integer.toString(book2.getAgeLimit()), Integer.toString(book2.getCount()) };
 						dtm.addRow(fila);
 				}
@@ -289,18 +289,18 @@ public class Booking extends JFrame implements ActionListener {
 			} else if (botonPulsado== btnBook){
 				String bookID=books.get(table.getSelectedRow()).getId();
 				ReserveDTO reservation=new ReserveDTO(bookID);
-				try {
-					app.reserve(reservation);
-				} catch (JsonGenerationException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (JsonMappingException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+//				try {
+//					app.reserve(reservation,);
+//				} catch (JsonGenerationException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				} catch (JsonMappingException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				} catch (IOException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				}
 			//Introduce in the database the information and send the confirmation email
 			}
 		}
