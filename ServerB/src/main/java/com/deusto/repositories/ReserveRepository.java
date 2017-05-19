@@ -8,6 +8,11 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/*!
+ * ReserveRepository class saves the created Reserve objects in a mongo repository.
+ * It exposes basic CRUD operations.
+ */
+
 @Repository
 public interface ReserveRepository extends MongoRepository<Reserve, String> {
 

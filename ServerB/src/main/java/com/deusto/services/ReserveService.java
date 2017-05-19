@@ -13,6 +13,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/*!
+ * ReserveService class exposes busines logic over ReeserveRepository.
+ */
+
 @Service
 public class ReserveService {
 

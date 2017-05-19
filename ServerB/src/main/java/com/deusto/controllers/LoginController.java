@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
+/*!
+ * Controller for mapping routes related to login.
+ * It is implements logic for loggin in using POST method.
+ */
 
 @Controller
 @RequestMapping(path = "/login")
@@ -20,6 +24,11 @@ public class LoginController {
     @Autowired
     private AuthenticationService authenticationService;
 
+    /**
+     * Logs an user into the system.
+     * @param loginDTO
+     * @return token
+     */
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<?> login(@RequestBody @Valid LoginDTO loginDTO) {
         return authenticationService.authentication(loginDTO);

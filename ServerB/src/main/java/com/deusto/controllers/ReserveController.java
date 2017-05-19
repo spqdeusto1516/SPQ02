@@ -20,6 +20,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * Controller used to manage routes related to reservation process.
+ */
 @Controller
 @RequestMapping("/reservation")
 public class ReserveController {
@@ -33,12 +36,22 @@ public class ReserveController {
     @Autowired
     AuthenticationService authenticationService;
 
+    /**
+     * Gets all the reservations made.
+     * @return ResponseEntity
+     */
     @GetMapping(path = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<?> getAll() {
         return new ResponseEntity(reserveService.findAll(), HttpStatus.OK);
     }
 
     /* trebuie de verificat count-ul */
+
+    /**
+     * Creates a new reservation.
+     * @param reserveDTO
+     * @return ResponseEntity - whether it succeeded or not
+     */
     @PostMapping(path = "/create", consumes = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<?> newReserve(@RequestBody ReserveDTO reserveDTO) {
 

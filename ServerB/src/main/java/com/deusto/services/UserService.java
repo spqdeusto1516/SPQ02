@@ -8,6 +8,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/*!
+ * UserService class exposes busines logic over UserRepository.
+ */
+
 @Service
 public class UserService {
     @Autowired

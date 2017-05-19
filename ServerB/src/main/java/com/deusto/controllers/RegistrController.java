@@ -26,6 +26,14 @@ import static java.lang.String.format;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.OK;
 
+/*!
+ * Controller for mapping routes related to registration.
+ * It is implements logic usign three steps:
+ * Step ONE: send email
+ * Step TWO: activate regirst user
+ * Step THREE: finish the registration process and create the actual user
+ */
+
 @Controller
 @RequestMapping("/registration")
 public class RegistrController {
@@ -45,6 +53,11 @@ public class RegistrController {
     @Autowired
     private AuthenticationService authenticationService;
 
+    /**
+     * Sends an email to user
+     * @param registrDTO
+     * @return
+     */
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<?> firstStep(@RequestBody @Valid RegistrDTO registrDTO) {
         //TODO avoid try catch block in controllers
@@ -58,6 +71,11 @@ public class RegistrController {
         return new ResponseEntity<>(ImmutableMap.of("message", env.getProperty("mail.message")), OK);
     }
 
+    /**
+     * Whhen user accesses the link, the registr.isActiv is set to true
+     * @param id
+     * @return
+     */
     @GetMapping(path = "/activate/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<?> secondStep(@PathVariable String id) {
         Registr registr = registrService.findById(id);
@@ -66,6 +84,11 @@ public class RegistrController {
         return new ResponseEntity<>(ImmutableMap.of("message", "successful activated"), OK);
     }
 
+    /**
+     * Checks if registr user is active and creates a new user
+     * @param person
+     * @return
+     */
     @PostMapping(path = "/person", produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<?> lastStep(@RequestBody @Valid PersonDTO person) {
         Registr registr = registrService.findByEmail(person.getEmail());

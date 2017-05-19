@@ -7,6 +7,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/*!
+ * BookService class exposes bussines logic over BookRepository.
+ */
+
 @Service
 public class BookService {
 

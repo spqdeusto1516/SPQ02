@@ -6,7 +6,9 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.URL;
 
 import static java.lang.String.format;
-
+/*!
+  * Registre Form is used to for the first step of registration.
+ */
 public class RegistrForm implements EmailField {
     @NotEmpty
     private String firstname;

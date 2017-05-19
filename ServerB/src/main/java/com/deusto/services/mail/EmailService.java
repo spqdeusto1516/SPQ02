@@ -8,6 +8,11 @@ import org.springframework.core.env.Environment;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+/*!
+ * EmailService class exposes bussines logic over email sending feature.
+ * It uses JavaMailSender, FreeMakerService and Environmet.
+ */
+
 @Service
 public class EmailService {
 

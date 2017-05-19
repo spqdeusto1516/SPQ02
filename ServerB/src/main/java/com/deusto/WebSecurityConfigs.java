@@ -18,6 +18,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import static org.springframework.http.HttpMethod.GET;
 
+/*!
+ * Security configuration on the client side.
+ * Uses spring annotations @Configuratin, @EnableWebSecurity and @EnambleGlobalMethodSecurity
+ */
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
