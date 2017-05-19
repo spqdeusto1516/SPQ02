@@ -182,7 +182,7 @@ public class Booking extends JFrame implements ActionListener {
 		background.add(lblUsername);
 		
 		table.setVisible(true);
-		btnBook.setVisible(false);
+		btnBook.setVisible(true);
 		btnexit.addActionListener(this);
 		btnFind.addActionListener(this);
 		btnBook.addActionListener(this);
@@ -245,7 +245,7 @@ public class Booking extends JFrame implements ActionListener {
 				e1.printStackTrace();
 			}
 			
-			btnBook.setVisible(true);
+			
 			} else if (botonPulsado== btnBook){
 				String bookID=books.get(table.getSelectedRow()-1).getId();
 				ReserveDTO reservation=new ReserveDTO(bookID);

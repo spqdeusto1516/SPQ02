@@ -166,7 +166,6 @@ public class Login extends JFrame implements ActionListener {
 							"You have to complete both!", "ERROR",
 							JOptionPane.ERROR_MESSAGE);
 				} else {
-					this.dispose();
 					LoginDTO login=new LoginDTO();
 					login.setEmail(email.getText());
 					login.setEncryptedPassword(password.getText());
@@ -174,6 +173,7 @@ public class Login extends JFrame implements ActionListener {
 					if(app.login(login)){
 						try {
 							Booking b= new Booking();
+							this.dispose();
 						} catch (ClientProtocolException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
