@@ -30,6 +30,7 @@ public class AuthenticationService {
                         loginDTO.getEncryptedPassword()
                 )
         );
+        
         SecurityContextHolder.getContext().setAuthentication(authentication);
         SecurityUser user = (SecurityUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return new ResponseEntity(ImmutableMap.of("token", tokenUtils.generateToken(user)), OK);

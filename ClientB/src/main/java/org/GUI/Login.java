@@ -166,28 +166,25 @@ public class Login extends JFrame implements ActionListener {
 							"You have to complete both!", "ERROR",
 							JOptionPane.ERROR_MESSAGE);
 				} else {
-					this.dispose();
 					LoginDTO login=new LoginDTO();
 					login.setEmail(email.getText());
 					login.setEncryptedPassword(password.getText());
 					Application app = new Application();
-					try {
-						app.login(login);
-					} catch (ClientProtocolException e2) {
-						// TODO Auto-generated catch block
-						e2.printStackTrace();
-					} catch (IOException e2) {
-						// TODO Auto-generated catch block
-						e2.printStackTrace();
-					}
-					try {
-						Booking b= new Booking();
-					} catch (ClientProtocolException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+					if(app.login(login)){
+						try {
+							Booking b= new Booking();
+							this.dispose();
+						} catch (ClientProtocolException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					} else{
+						JOptionPane.showMessageDialog(null,
+								"User not found, please enter a valid credentials", "Information",
+								JOptionPane.INFORMATION_MESSAGE);
 					}
 				} 
 		} 
@@ -196,10 +193,14 @@ public class Login extends JFrame implements ActionListener {
 
 class BackgroundLogin extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public void paintComponent(Graphics g) {
 		Dimension tamaño = getSize();
-		ImageIcon imagenFondo = new ImageIcon(new ImageIcon(getClass()
-				.getResource("/images/background.jpg")).getImage());
+		ImageIcon imagenFondo = new ImageIcon(new ImageIcon(getClass().getResource("/images/background.jpg")).getImage());
 		g.drawImage(imagenFondo.getImage(), 0, 0, tamaño.width, tamaño.height,
 				null);
 

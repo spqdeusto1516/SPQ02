@@ -3,8 +3,15 @@ package org.dtos;
 public class ReserveDTO {
 
     private String bookId;
+    
+    
 
-    public String getBookId() {
+    public ReserveDTO(String bookId) {
+		super();
+		this.bookId = bookId;
+	}
+
+	public String getBookId() {
         return bookId;
     }
 

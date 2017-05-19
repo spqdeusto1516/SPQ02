@@ -7,11 +7,16 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
+import org.ClientP.Application;
+import org.apache.http.client.ClientProtocolException;
+import org.dtos.RegistrDTO;
 import org.models.User;
 
 import javax.swing.JTextField;
@@ -31,8 +36,6 @@ public class Register extends JFrame implements ActionListener {
 	public static User newUser;
 	private JButton btnexit, btnRegister;
 	public static User j = null;
-	private JLabel lblPassword;
-	private JTextField password;
 	private JLabel lblSurname;
 	private JTextField surname;
 	private JTextField email;
@@ -98,32 +101,18 @@ public class Register extends JFrame implements ActionListener {
 		btnexit.setBounds(33, 652, 200, 50);
 		background.add(btnexit);
 		
-		lblPassword = new JLabel("Password");
-		lblPassword.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPassword.setForeground(Color.WHITE);
-		lblPassword.setFont(new Font("Century Schoolbook", Font.PLAIN, 50));
-		lblPassword.setBackground(SystemColor.menu);
-		lblPassword.setBounds(229, 357, 272, 81);
-		background.add(lblPassword);
-		
-		password = new JTextField();
-		password.setForeground(Color.BLACK);
-		password.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		password.setBounds(596, 394, 249, 32);
-		background.add(password);
-		
 		lblSurname = new JLabel("Surname");
 		lblSurname.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSurname.setForeground(Color.WHITE);
 		lblSurname.setFont(new Font("Century Schoolbook", Font.PLAIN, 50));
 		lblSurname.setBackground(SystemColor.menu);
-		lblSurname.setBounds(229, 175, 272, 81);
+		lblSurname.setBounds(229, 237, 272, 81);
 		background.add(lblSurname);
 		
 		surname = new JTextField();
 		surname.setForeground(Color.BLACK);
 		surname.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		surname.setBounds(596, 212, 249, 32);
+		surname.setBounds(596, 274, 249, 32);
 		background.add(surname);
 		
 		JLabel lblEmail = new JLabel("Email");
@@ -131,13 +120,13 @@ public class Register extends JFrame implements ActionListener {
 		lblEmail.setForeground(Color.WHITE);
 		lblEmail.setFont(new Font("Century Schoolbook", Font.PLAIN, 50));
 		lblEmail.setBackground(SystemColor.menu);
-		lblEmail.setBounds(229, 263, 272, 81);
+		lblEmail.setBounds(232, 375, 272, 81);
 		background.add(lblEmail);
 		
 		email = new JTextField();
 		email.setForeground(Color.BLACK);
 		email.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		email.setBounds(596, 300, 249, 32);
+		email.setBounds(596, 412, 249, 32);
 		background.add(email);
 		btnexit.addActionListener(this);
 
@@ -168,17 +157,35 @@ public class Register extends JFrame implements ActionListener {
 		} else if (botonPulsado == btnRegister) {
 			String u = name.getText();
 
-					if (name.getText().equals("")||surname.getText().equals("")||email.getText().equals("")||(password.getText().equals(""))) {
+					if (name.getText().equals("")||surname.getText().equals("")||email.getText().equals("")) {
 						JOptionPane.showMessageDialog(null,
 								"You have to complete everything!", "ERROR",
 								JOptionPane.ERROR_MESSAGE);
-					} else if (!name.getText().equals("")){
+					} else {
 						JOptionPane.showMessageDialog(null,
 								"We have sent a confirmation email to your email address, please confirm your account.", "Information",
 								JOptionPane.INFORMATION_MESSAGE);
+						Register2 rg2=new Register2();
+						Application app = new Application();
+						RegistrDTO registr=new RegistrDTO();
+						registr.setFirstname(name.getText());
+						registr.setLastname(surname.getText());
+						registr.setEmail(email.getText());
+						newUser.setEmail(email.getText());
+						newUser.setFirstname(name.getText());
+						newUser.setLastname(surname.getText());
+						try {
+							app.registr1(registr);
+						} catch (ClientProtocolException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 						this.dispose();
 						
-					//Introduce in the database the new user and he/she should log in in the previous window
+						
 				} 
 			
 		} 
