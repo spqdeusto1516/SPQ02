@@ -3,11 +3,30 @@ Our amazing team decided to create a booking aplication for reserving books in a
 ### Prerequisites:
 <ul> 
 	<li>Intellij IDEA or Eclipse developement environments</li>
-	<li>docker</li>
 	<li>mongo db </li>
 </ul>
 
-If you want to run the application in Intellij IDEA make sure you configure it as a SpringBoot application.
+If you want to run the application in Intellij IDEA make sure you configure it as a SpringBoot application. <br />
+
+In order to run the Jenkins CI, you will be interested to pull the docker container from the docker hub, and then to run the jenkins-spq container. <br />
+For this you need to have, as well, docker installed. <br />
+
+Make sure you have doxygen installed, for generating the documentation. <br />
+
+For this, you will need the following:
+
+<ul>
+	<li>GNU tools:
+		<ol>
+			<li>flex</li>
+			<li>bison</li>
+			<li>libiconv</li>
+			<li>make</li>
+			<li>strip</li>
+		<ol>
+	</li>
+</ul?
+
 
 ### For the server side
 SPRING Boot framework <br />

@@ -30,3 +30,7 @@ ServerB/.settings/
 
 # Documentation Files
 #*.pdf
+
+# Ignore Documentation generated files:
+**/doxygen/
+

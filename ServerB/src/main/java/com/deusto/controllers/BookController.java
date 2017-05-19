@@ -21,6 +21,13 @@ import java.util.Set;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.OK;
 
+/*!
+ * Controller for mapping routes related to book.
+ * It is implements logic for returning all the books via GET method,
+ * create a book via POST, retrieve by ID using GET mapping as well as
+ * filtering by specific parameter using POST method.
+ */
+
 @Controller
 @RequestMapping("/book")
 public class BookController {
@@ -28,23 +35,39 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
+    /**
+     * Retreives all the books.
+     * @return ResponseEntity
+     */
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<?> getAllBooks() {
         return new ResponseEntity(bookService.findAll(), OK);
     }
 
-    /* pentru mine ca sa pot introduce carti */
+    /**
+     * Creates a new book
+     * @param bookDTO BookDTO
+     */
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<?> createBook(@RequestBody BookDTO bookDTO) {
-
         return new ResponseEntity(bookService.insert(BookBuilder.get(bookDTO)), HttpStatus.OK);
     }
 
+    /**
+     * Get book by id
+     * @param id
+     * @return
+     */
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<?> getBookById(@PathVariable String id) {
         return new ResponseEntity(bookService.findById(id), OK);
     }
 
+    /**
+     * Get books depending on the sent parameter
+     * @param filterDTO
+     * @return
+     */
     @PostMapping(path = "/filter", consumes = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<?> getAllBooksFilter1(@RequestBody FilterDTO filterDTO) {
         Set set = new HashSet();
@@ -54,14 +77,6 @@ public class BookController {
             set.addAll(bookService.findByTitle(filterDTO.getTitle()));
         }
 
-        if(filterDTO.getAuthorName() != null) {
-            set.addAll(bookService.findAllByAuthorFirstName(filterDTO.getTitle()));
-        }
-        
-        if(filterDTO.getAuthorSurname() != null) {
-            set.addAll(bookService.findByAuthorLastName(filterDTO.getTitle()));
-        }
-        
         if (filterDTO.getGenre() != null) {
             set.addAll(bookService.findByGenre(filterDTO.getTitle()));
         }

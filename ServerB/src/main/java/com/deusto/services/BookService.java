@@ -7,6 +7,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/*!
+ * BookService class exposes bussines logic over BookRepository.
+ */
+
 @Service
 public class BookService {
 
@@ -26,7 +30,7 @@ public class BookService {
     }
 
     public List<Book> findAllByAuthorFirstName(String firstName) {
-        return bRepository.findAllByAuthorFirstName(firstName);
+        return bRepository.findAllByAuthorLastName(firstName);
     }
 
     public List<Book> findByGenre(String genre) {

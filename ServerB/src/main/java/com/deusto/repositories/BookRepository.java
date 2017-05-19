@@ -8,6 +8,11 @@ import java.util.List;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
+/*!
+ * BookRepository class saves the created Book objects in a mongo repository.
+ * It exposes basic CRUD operations.
+ */
+
 @Repository
 public interface BookRepository extends MongoRepository<Book,String>{
 	List<Book> findAll();

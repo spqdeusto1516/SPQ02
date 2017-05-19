@@ -5,6 +5,10 @@ import com.deusto.repositories.RegistrRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/*!
+ * RegistrService class exposes bussines logic over RegistrRepository.
+ */
+
 @Service
 public class RegistrService {
 
