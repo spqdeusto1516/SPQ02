@@ -33,6 +33,7 @@ import javax.swing.JButton;
 
 
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 
@@ -46,6 +47,9 @@ public class Login extends JFrame implements ActionListener {
 	private JLabel lblPassword;
 	private JPasswordField password;
 
+	/**
+	 * Creates the GUI of the Login process
+	 */
 	public Login() {
 		newUser = new User();
 
@@ -68,28 +72,6 @@ public class Login extends JFrame implements ActionListener {
 		email.setBounds(596, 250, 249, 32);
 
 		background.add(email);
-		KeyListener keylistener = new KeyListener() {
-
-			@Override
-			public void keyPressed(KeyEvent e) {
-				// TODO Auto-generated method stub
-				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-					btnLogIn.doClick();
-				}
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-		};
 
 		btnLogIn = new JButton("Log in");
 		btnLogIn.setBackground(Color.BLACK);
@@ -100,13 +82,13 @@ public class Login extends JFrame implements ActionListener {
 		btnLogIn.requestFocus();
 		background.add(btnLogIn);
 
-		
+
 
 		btnexit = new JButton("Exit");
 		btnexit.setFont(new Font("Yu Gothic", Font.PLAIN, 24));
 		btnexit.setBounds(33, 652, 200, 50);
 		background.add(btnexit);
-		
+
 		lblPassword = new JLabel("Password");
 		lblPassword.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPassword.setForeground(Color.WHITE);
@@ -114,24 +96,34 @@ public class Login extends JFrame implements ActionListener {
 		lblPassword.setBackground(SystemColor.menu);
 		lblPassword.setBounds(229, 342, 272, 125);
 		background.add(lblPassword);
-		
+
 		password = new JPasswordField();
 		password.setForeground(Color.BLACK);
 		password.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		password.setBounds(596, 394, 249, 32);
 		background.add(password);
-		
+
+		password.addKeyListener(new KeyAdapter() {
+
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER){
+					btnLogIn.doClick();
+				}
+			}
+
+		});
+
 		JLabel lblCreateAnAccount = new JLabel("Create an account");
 		lblCreateAnAccount.setForeground(Color.WHITE);
 		lblCreateAnAccount.setFont(new Font("Segoe UI Semibold", Font.BOLD, 18));
 		lblCreateAnAccount.setBounds(499, 460, 167, 32);
 		lblCreateAnAccount.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-               Register rg= new Register(); 
-            }
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Register rg= new Register(); 
+			}
 
-        });
+		});
 
 		background.add(lblCreateAnAccount);
 		btnexit.addActionListener(this);
@@ -152,6 +144,9 @@ public class Login extends JFrame implements ActionListener {
 		Login x = new Login();
 	}
 
+	/**
+	 * Identify which is the JButton that received the action and act accordingly
+	 */
 	@SuppressWarnings("deprecation")
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -161,43 +156,44 @@ public class Login extends JFrame implements ActionListener {
 			System.exit(0);
 		} else if (botonPulsado == btnLogIn) {
 			String u = email.getText();
-				if (email.getText().equals("")||(password.getText().equals(""))) {
-					JOptionPane.showMessageDialog(null,
-							"You have to complete both!", "ERROR",
-							JOptionPane.ERROR_MESSAGE);
-				} else {
-					LoginDTO login=new LoginDTO();
-					login.setEmail(email.getText());
-					login.setEncryptedPassword(password.getText());
-					Application app = new Application();
-					if(app.login(login)){
-						try {
-							Booking b= new Booking();
-							this.dispose();
-						} catch (ClientProtocolException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						} catch (IOException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-					} else{
-						JOptionPane.showMessageDialog(null,
-								"User not found, please enter a valid credentials", "Information",
-								JOptionPane.INFORMATION_MESSAGE);
+			if (email.getText().equals("")||(password.getText().equals(""))) {
+				JOptionPane.showMessageDialog(null,
+						"You have to complete both!", "ERROR",
+						JOptionPane.ERROR_MESSAGE);
+			} else {
+				LoginDTO login=new LoginDTO();
+				login.setEmail(email.getText());
+				login.setEncryptedPassword(password.getText());
+				Application app = new Application();
+				if(app.login(login)){
+					try {
+						Booking b= new Booking();
+						this.dispose();
+					} catch (ClientProtocolException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					}
-				} 
+				} else{
+					JOptionPane.showMessageDialog(null,
+							"User not found, please enter a valid credentials", "Information",
+							JOptionPane.INFORMATION_MESSAGE);
+				}
+			} 
 		} 
 	}
 }
 
 class BackgroundLogin extends JPanel {
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 
+	/** 
+	 * With this method we give the GUI a background image
+	 */
 	public void paintComponent(Graphics g) {
 		Dimension tamaño = getSize();
 		ImageIcon imagenFondo = new ImageIcon(new ImageIcon(getClass().getResource("/images/background.jpg")).getImage());

@@ -25,6 +25,7 @@ import javax.swing.JButton;
 
 
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 
@@ -40,6 +41,9 @@ public class Register extends JFrame implements ActionListener {
 	private JTextField surname;
 	private JTextField email;
 
+	/**
+	 * Creates the GUI for the first part of the Register process
+	 */
 	public Register() {
 		newUser = new User();
 
@@ -62,28 +66,7 @@ public class Register extends JFrame implements ActionListener {
 		name.setBounds(596, 118, 249, 32);
 
 		background.add(name);
-		KeyListener keylistener = new KeyListener() {
 
-			@Override
-			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void keyPressed(KeyEvent e) {
-				// TODO Auto-generated method stub
-				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-					btnRegister.doClick();
-				}
-			}
-		};
 
 		btnRegister = new JButton("Register");
 		btnRegister.setBackground(Color.BLACK);
@@ -128,6 +111,17 @@ public class Register extends JFrame implements ActionListener {
 		email.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		email.setBounds(596, 412, 249, 32);
 		background.add(email);
+		
+		email.addKeyListener(new KeyAdapter() {
+
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER){
+					btnRegister.doClick();
+				}
+			}
+
+		});
+		
 		btnexit.addActionListener(this);
 
 		this.setSize(1200, 800);
@@ -146,9 +140,11 @@ public class Register extends JFrame implements ActionListener {
 		Register x = new Register();
 	}
 
+	/** 
+	 * Identify which is the JButton that received the action and act accordingly
+	 **/
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 
 		JButton botonPulsado = (JButton) e.getSource();
 

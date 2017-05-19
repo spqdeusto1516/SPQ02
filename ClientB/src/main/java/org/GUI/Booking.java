@@ -43,6 +43,10 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
 
+/**
+ * @author Asier
+ *
+ */
 public class Booking extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
@@ -70,6 +74,11 @@ public class Booking extends JFrame implements ActionListener {
 	private HttpEntity entity;
 	private String[] titles;
 
+	/**
+	 * Creates the GUI of the Booking process
+	 * @throws ClientProtocolException
+	 * @throws IOException
+	 */
 	public Booking() throws ClientProtocolException, IOException {
 		newUser = new User();
 
@@ -210,6 +219,9 @@ public class Booking extends JFrame implements ActionListener {
 		this.setVisible(true);
 	}
 
+	/**
+	 * Clear everything inside the JTable
+	 */
 	private void ClearTable(){
 	       for (int i = 0; i < table.getRowCount(); i++) {
 	           dtm.removeRow(i);
@@ -221,6 +233,9 @@ public class Booking extends JFrame implements ActionListener {
 		Booking x = new Booking();
 	}
 
+	/** 
+	 * Identify which is the JButton that received the action and act accordingly
+	 **/
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -294,11 +309,14 @@ public class Booking extends JFrame implements ActionListener {
 
 class BackgroundBooking extends JPanel {
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 
+
+
+	/** 
+	 * With this method we give the GUI a background image
+	 */
 	public void paintComponent(Graphics g) {
 		Dimension tamaño = getSize();
 		ImageIcon imagenFondo = new ImageIcon(new ImageIcon(getClass()

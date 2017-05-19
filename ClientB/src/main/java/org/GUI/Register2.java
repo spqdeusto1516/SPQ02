@@ -32,6 +32,7 @@ import javax.swing.JButton;
 
 
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 
@@ -54,7 +55,10 @@ public class Register2 extends JFrame implements ActionListener {
 	private JTextField street;
 	private JTextField houseNumber;
 	private JTextField apartmentNumber;
-
+	
+	/**
+	 * Creates the GUI for the second part of the Register process
+	 */
 	public Register2() {
 		
 
@@ -84,25 +88,7 @@ public class Register2 extends JFrame implements ActionListener {
 		countrycode.setBounds(460, 168, 69, 31);
 
 		background.add(countrycode);
-		KeyListener keylistener = new KeyListener() {
-
-			@Override
-			public void keyTyped(KeyEvent e) {
-
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-				
-			}
-
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-					btnConfirm.doClick();
-				}
-			}
-		};
+		
 
 		btnConfirm = new JButton("Confirm");
 		btnConfirm.setBackground(Color.BLACK);
@@ -241,6 +227,16 @@ public class Register2 extends JFrame implements ActionListener {
 		background.add(apartmentNumber);
 		btnexit.addActionListener(this);
 
+		password.addKeyListener(new KeyAdapter() {
+
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER){
+					btnConfirm.doClick();
+				}
+			}
+
+		});
+		
 		this.setSize(1200, 800);
 		this.setResizable(false);
 		Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
@@ -257,6 +253,10 @@ public class Register2 extends JFrame implements ActionListener {
 		Register2 x = new Register2();
 	}
 
+	
+	/** 
+	 * Identify which is the JButton that received the action and act accordingly
+	 **/
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
