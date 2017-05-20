@@ -19,6 +19,7 @@ import javax.swing.SwingConstants;
 
 import org.ClientP.Application;
 import org.apache.http.client.ClientProtocolException;
+import org.controllers.RegistrController;
 import org.models.Address;
 import org.models.User;
 
@@ -301,9 +302,8 @@ public class Register2 extends JFrame implements ActionListener {
 				//			System.out.println(Register.newUser.getPassword());
 				//			System.out.println(Register.newUser.getPhone());
 				//			System.out.println(Register.newUser.getEmail());
-				Application app = new Application();
 				try {
-					app.registr2(Register.newUser);
+					RegistrController.registrStep2(Register.newUser);
 				} catch (ClientProtocolException e1) {
 					e1.printStackTrace();
 				} catch (IOException e1) {

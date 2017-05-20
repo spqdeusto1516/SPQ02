@@ -23,7 +23,6 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
 
-import org.ClientP.Application;
 import org.apache.http.client.ClientProtocolException;
 import org.controllers.LoginController;
 import org.dtos.LoginDTO;

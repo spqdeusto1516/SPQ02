@@ -34,7 +34,5 @@ public class ReserveController {
                         });
 
         Reserve body = rateResponse.getBody();
-
-        System.out.println(body.getBook().getTitle());
     }
 }

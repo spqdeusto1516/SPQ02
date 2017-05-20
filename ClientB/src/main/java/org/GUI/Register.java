@@ -16,6 +16,7 @@ import javax.swing.SwingConstants;
 
 import org.ClientP.Application;
 import org.apache.http.client.ClientProtocolException;
+import org.controllers.RegistrController;
 import org.dtos.RegistrDTO;
 import org.models.User;
 
@@ -162,7 +163,6 @@ public class Register extends JFrame implements ActionListener {
 								"We have sent a confirmation email to your email address, please confirm your account.", "Information",
 								JOptionPane.INFORMATION_MESSAGE);
 						Register2 rg2=new Register2();
-						Application app = new Application();
 						RegistrDTO registr=new RegistrDTO();
 						registr.setFirstname(name.getText());
 						registr.setLastname(surname.getText());
@@ -171,14 +171,12 @@ public class Register extends JFrame implements ActionListener {
 						newUser.setFirstname(name.getText());
 						newUser.setLastname(surname.getText());
 						try {
-							app.registr1(registr);
-						} catch (ClientProtocolException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
+							RegistrController.registrStep1(registr);
 						} catch (IOException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
+						
 						this.dispose();
 						
 						

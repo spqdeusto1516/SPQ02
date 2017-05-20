@@ -27,14 +27,12 @@ public class LoginController {
 //        headers.add("X_AUTH_TOKEN", "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkaWFuYS5hcnRpb21Ab3BlbmRldXN0by5lcyIsImNyZWF0ZWQiOjE0OTUyMzEzMzEzNTEsImV4cCI6MTU4MTYzMTMzMX0.EjBpAiMc2X2kmmdPNU97aDSbbpojAIQvmPR2RoiAP9afpKihSmEi5_k4fgryC5N10NSVbCUaWYAcaAgmKIkY5g");
         HttpEntity<String> entity = new HttpEntity<String>(json, headers);
 
-        ResponseEntity<String> rateResponse =
+        ResponseEntity<Token> rateResponse =
                 restTemplate.exchange(REST_SERVICE_URI + "/login",
-                        HttpMethod.POST, entity, new ParameterizedTypeReference<String>() {
+                        HttpMethod.POST, entity, new ParameterizedTypeReference<Token>() {
                         });
 
-        String body = rateResponse.getBody();
-        Token token = new Token();
-        token = mapper.readValue(body, Token.class);
+        Token token = rateResponse.getBody();
         return token;
     }
 }
