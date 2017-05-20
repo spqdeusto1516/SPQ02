@@ -17,7 +17,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
 
-import org.ClientP.Application;
 import org.apache.http.client.ClientProtocolException;
 import org.controllers.RegistrController;
 import org.models.Address;

@@ -45,7 +45,7 @@ public class BookService {
         return bRepository.findAllByAuthorLastName(lastName);
     }
 
-    public void update(Book registr) {
-        bRepository.save(registr);
+    public Book update(Book registr) {
+        return bRepository.save(registr);
     }
 }

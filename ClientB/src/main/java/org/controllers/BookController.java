@@ -1,6 +1,8 @@
 package org.controllers;
 
 
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.dtos.FilterDTO;
 import org.models.Book;
@@ -48,5 +50,25 @@ public class BookController {
                         });
         List<Book> books = rateResponse.getBody();
 		return books;
+    }
+    
+    public static void updateBook(Book book) throws IOException{
+    	 System.out.println("------------ Update book ----------");
+         RestTemplate restTemplate = new RestTemplate();
+         
+         ObjectMapper mapper = new ObjectMapper();
+         String json = mapper.writeValueAsString(book);
+         
+         HttpHeaders headers = new HttpHeaders();
+         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+         headers.setContentType(MediaType.APPLICATION_JSON);
+         
+         HttpEntity<String> entity = new HttpEntity<String>(json, headers);
+         ResponseEntity<String> rateResponse =
+                 restTemplate.exchange(REST_SERVICE_URI + "/book/update",
+                         HttpMethod.POST, entity, new ParameterizedTypeReference<String>() {
+                         });
+         String body = rateResponse.getBody();
+         System.out.println(body);
     }
 }

@@ -21,7 +21,6 @@ import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
 
-import org.ClientP.Application;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
 import org.codehaus.jackson.JsonGenerationException;
@@ -207,6 +206,7 @@ public class Booking extends JFrame implements ActionListener {
 		btnexit.addActionListener(this);
 		btnFind.addActionListener(this);
 		btnBook.addActionListener(this);
+		btnShowAll.addActionListener(this);
 		
 		
 
@@ -246,6 +246,7 @@ public class Booking extends JFrame implements ActionListener {
 		if (botonPulsado == btnexit) {
 			System.exit(0);
 		} else if (botonPulsado == btnShowAll){
+			ClearTable();
 			dtm.addRow(titles);
 			books = BookController.getAllBooks();
 			for (int i = 0; i <books.size(); i++) {
@@ -256,7 +257,6 @@ public class Booking extends JFrame implements ActionListener {
 			}
 		}else if (botonPulsado == btnFind) {
 			btnShowAll.setVisible(true);
-			btnShowAll.setEnabled(true);
 			ClearTable();
 			FilterDTO filter=new FilterDTO();
 			if (filtered.getSelectedIndex()==0) {//by title
@@ -274,7 +274,6 @@ public class Booking extends JFrame implements ActionListener {
 				List<Book> books2 = BookController.getBooksFilter(filter);
 				for (int i = 0; i <books2.size(); i++) {
 					Book book2 = books2.get(i);
-					System.out.println(book2.getId());
 					String fila [] = {book2.getId(),book2.getTitle(),book2.getAuthorFirstName(),book2.getAuthorLastName(), book2.getGenre(), book2.getDescription(), Long.toString(book2.getPublishDate()), Integer.toString(book2.getPages()), Integer.toString(book2.getAgeLimit()), Integer.toString(book2.getCount()) };
 						dtm.addRow(fila);
 				}
@@ -288,11 +287,19 @@ public class Booking extends JFrame implements ActionListener {
 			
 			
 			} else if (botonPulsado== btnBook){
-				String bookID=books.get(table.getSelectedRow()).getId();
+				String bookID=books.get(table.getSelectedRow()-1).getId();
 				ReserveDTO reservation=new ReserveDTO(bookID);
 				Token token = Login.token;
+				ClearTable();
 				try {
 					ReserveController.create(reservation,token);
+					dtm.addRow(titles);
+					books = BookController.getAllBooks();
+					for (int i = 0; i <books.size(); i++) {
+						Book book2 = books.get(i);
+						String fila [] = {book2.getId(),book2.getTitle(),book2.getAuthorFirstName(),book2.getAuthorLastName(), book2.getGenre(), book2.getDescription(), Long.toString(book2.getPublishDate()), Integer.toString(book2.getPages()), Integer.toString(book2.getAgeLimit()), Integer.toString(book2.getCount()) };
+							dtm.addRow(fila);
+					}
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

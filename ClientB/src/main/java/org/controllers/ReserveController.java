@@ -34,5 +34,9 @@ public class ReserveController {
                         });
 
         Reserve body = rateResponse.getBody();
+        System.out.println(body.getBook().getCount());
+        BookController.updateBook(body.getBook());
     }
+    
+    
 }
