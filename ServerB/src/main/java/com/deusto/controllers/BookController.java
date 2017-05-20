@@ -73,13 +73,21 @@ public class BookController {
         Set set = new HashSet();
         Long nullValue = null;
         List<Book> bookList = new ArrayList<>(); // set rather than list
+        if (filterDTO.getGenre() != null) {
+            set.addAll(bookService.findByGenre(filterDTO.getGenre()));
+        }
         if(filterDTO.getTitle() != null) {
             set.addAll(bookService.findByTitle(filterDTO.getTitle()));
         }
-
-        if (filterDTO.getGenre() != null) {
-            set.addAll(bookService.findByGenre(filterDTO.getTitle()));
+        
+        if (filterDTO.getAuthorName() != null) {
+            set.addAll(bookService.findAllByAuthorFirstName(filterDTO.getAuthorName()));
         }
+        
+        if (filterDTO.getAuthorSurname() != null) {
+            set.addAll(bookService.findByAuthorLastName(filterDTO.getAuthorSurname()));
+        }
+        
         bookList.addAll(set);
         return new ResponseEntity<>(bookList, OK);
     }

@@ -25,6 +25,7 @@ import javax.swing.SwingConstants;
 
 import org.ClientP.Application;
 import org.apache.http.client.ClientProtocolException;
+import org.controllers.LoginController;
 import org.dtos.LoginDTO;
 import org.models.*;
 import javax.swing.JTextField;
@@ -43,6 +44,7 @@ public class Login extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private JTextField email;
 	public static User newUser;
+	public static Token token;
 	private JButton btnexit, btnLogIn;
 	private JLabel lblPassword;
 	private JPasswordField password;
@@ -164,8 +166,12 @@ public class Login extends JFrame implements ActionListener {
 				LoginDTO login=new LoginDTO();
 				login.setEmail(email.getText());
 				login.setEncryptedPassword(password.getText());
-				Application app = new Application();
-				if(app.login(login)){
+				try {
+					token = LoginController.login(login);
+				} catch (IOException e2) {
+					e2.printStackTrace();
+				}
+				if(token.getToken() != null){
 					try {
 						Booking b= new Booking();
 						this.dispose();

@@ -4,7 +4,7 @@ package org.dtos;
 public class FilterDTO {
 
     private String title;
-    protected String genre;
+    private String genre;
     private String authorName;
     private String authorSurname;
     private Long reserveDate;

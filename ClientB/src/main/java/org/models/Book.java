@@ -107,4 +107,14 @@ public class Book {
         this.count--;
         return this;
     }
+    public String toString(){
+    	String book = this.id + " ";
+    	book += this.title + " ";
+    	book += this.genre + " "; 
+    	book += this.description + " "; 
+    	book += this.authorFirstName + " "; 
+    	book += this.authorLastName + " "; 
+		return book;
+    	
+    }
 }

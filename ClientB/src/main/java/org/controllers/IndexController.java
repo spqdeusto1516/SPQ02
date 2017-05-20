@@ -1,6 +1,6 @@
 package org.controllers;
 
-import org.models.Bookk;
+import org.models.Book;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
@@ -17,15 +17,15 @@ public class IndexController {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.add("X_AUTH_TOKEN", "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkaWFuYS5hcnRpb21Ab3BlbmRldXN0by5lcyIsImNyZWF0ZWQiOjE0OTUyMzEzMzEzNTEsImV4cCI6MTU4MTYzMTMzMX0.EjBpAiMc2X2kmmdPNU97aDSbbpojAIQvmPR2RoiAP9afpKihSmEi5_k4fgryC5N10NSVbCUaWYAcaAgmKIkY5g");
+  //      headers.add("X_AUTH_TOKEN", "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkaWFuYS5hcnRpb21Ab3BlbmRldXN0by5lcyIsImNyZWF0ZWQiOjE0OTUyMzEzMzEzNTEsImV4cCI6MTU4MTYzMTMzMX0.EjBpAiMc2X2kmmdPNU97aDSbbpojAIQvmPR2RoiAP9afpKihSmEi5_k4fgryC5N10NSVbCUaWYAcaAgmKIkY5g");
 
         HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
-        ResponseEntity<Bookk> rateResponse =
+        ResponseEntity<Book> rateResponse =
                 restTemplate.exchange(REST_SERVICE_URI + "/index/auth",
-                        HttpMethod.GET, entity, new ParameterizedTypeReference<Bookk>() {
+                        HttpMethod.GET, entity, new ParameterizedTypeReference<Book>() {
                         });
 
-        Bookk bookk = rateResponse.getBody();
-        System.out.println(bookk.getAgeLimit());
+        Book book = rateResponse.getBody();
+        System.out.println(book.getAgeLimit());
     }
 }

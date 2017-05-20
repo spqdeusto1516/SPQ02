@@ -8,6 +8,7 @@ import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -26,7 +27,10 @@ import org.apache.http.client.ClientProtocolException;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
+import org.controllers.BookController;
+import org.controllers.ReserveController;
 import org.models.Book;
+import org.models.Token;
 import org.models.User;
 
 import org.dtos.FilterDTO;
@@ -67,8 +71,7 @@ public class Booking extends JFrame implements ActionListener {
 	private JButton btnBook, btnShowAll;
 	private JLabel lblBy;
 	private JLabel lblUsername;
-	private Application app;
-	private ArrayList<Book> books;
+	private List<Book> books;
 	private JComboBox filtered;
 	private DefaultTableModel dtm;
 	private HttpEntity entity;
@@ -137,9 +140,7 @@ public class Booking extends JFrame implements ActionListener {
 			dtm.addColumn(titles[i]);
 		}
 		dtm.addRow(titles);
-		app = new Application();
-		entity = app.startConnectionGet("http://localhost:8080/book");
-		books = app.getBooks(entity);
+		books = BookController.getAllBooks();
 		System.out.println(books.size());
 		//books.add(new Book("1212", "Romeo y Julieta","William", "Shakespeare","Drama", "They die", 2012190383 , 300, 13, 7));
 		for (int i = 0; i <books.size(); i++) {
@@ -246,6 +247,7 @@ public class Booking extends JFrame implements ActionListener {
 			System.exit(0);
 		} else if (botonPulsado == btnShowAll){
 			dtm.addRow(titles);
+			books = BookController.getAllBooks();
 			for (int i = 0; i <books.size(); i++) {
 				Book book = books.get(i);
 				
@@ -254,6 +256,7 @@ public class Booking extends JFrame implements ActionListener {
 			}
 		}else if (botonPulsado == btnFind) {
 			btnShowAll.setVisible(true);
+			btnShowAll.setEnabled(true);
 			ClearTable();
 			FilterDTO filter=new FilterDTO();
 			if (filtered.getSelectedIndex()==0) {//by title
@@ -264,13 +267,11 @@ public class Booking extends JFrame implements ActionListener {
 				filter.setAuthorSurname(tfSearch.getText());
 			} else if(filtered.getSelectedIndex()==3){//by genre
 				filter.setGenre(tfSearch.getText());
-			} else if(filtered.getSelectedIndex()==4){//by ranking
-				//RANKING
 			}
 			
 			try {
 				dtm.addRow(titles);
-				ArrayList<Book> books2 = app.getBooks(app.getBooksFilter(filter));
+				List<Book> books2 = BookController.getBooksFilter(filter);
 				for (int i = 0; i <books2.size(); i++) {
 					Book book2 = books2.get(i);
 					System.out.println(book2.getId());
@@ -289,20 +290,15 @@ public class Booking extends JFrame implements ActionListener {
 			} else if (botonPulsado== btnBook){
 				String bookID=books.get(table.getSelectedRow()).getId();
 				ReserveDTO reservation=new ReserveDTO(bookID);
-//				try {
-//					app.reserve(reservation,);
-//				} catch (JsonGenerationException e1) {
-//					// TODO Auto-generated catch block
-//					e1.printStackTrace();
-//				} catch (JsonMappingException e1) {
-//					// TODO Auto-generated catch block
-//					e1.printStackTrace();
-//				} catch (IOException e1) {
-//					// TODO Auto-generated catch block
-//					e1.printStackTrace();
-//				}
+				Token token = Login.token;
+				try {
+					ReserveController.create(reservation,token);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			//Introduce in the database the information and send the confirmation email
-			}
+			} 
 		}
 	}
 

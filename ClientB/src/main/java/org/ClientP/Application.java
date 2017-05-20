@@ -9,8 +9,6 @@ import org.models.Address;
 import org.models.Book;
 import org.models.Token;
 import org.models.User;
-import org.security.SecurityUser;
-import org.security.TokenUtils;
 
 import com.mongodb.util.JSON;
 
@@ -158,12 +156,7 @@ public class Application {
 //	    httpPostRequest.setHeader("Content-type", "application/json");
 //	    httpPostRequest.setHeader("Authorization",this.token.getToken());
 
-
-		String auth = login.getEmail() + ":" + login.getEncryptedPassword();
-		byte[] encodedAuth = Base64.encodeBase64(
-		  auth.getBytes(Charset.forName("ISO-8859-1")));
-		String authHeader = "Basic " + new String(encodedAuth);
-		httpPostRequest.setHeader(HttpHeaders.AUTHORIZATION, authHeader);
+		httpPostRequest.setHeader("X_AUTH_TOKEN", this.token.getToken());
 		httpPostRequest.setHeader(HttpHeaders.CONTENT_TYPE, "application/json");
 		httpPostRequest.setEntity(entity);
 		
