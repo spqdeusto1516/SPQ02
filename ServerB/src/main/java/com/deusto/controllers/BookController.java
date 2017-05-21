@@ -55,7 +55,7 @@ public class BookController {
     
     /**
      * Creates a new book
-     * @param bookDTO BookDTO
+     * @param Book book
      */
     @PostMapping(path = "/update",consumes = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<?> updateBook(@RequestBody Book book) {

@@ -16,7 +16,10 @@ import org.springframework.web.client.RestTemplate;
 
 public class RegistrController {
 	public static final String REST_SERVICE_URI = "http://localhost:8080/";
-	
+	/**
+     * Makes the first step for registering
+     * @return RegistrDTO
+     */
 	public static void registrStep1(RegistrDTO register) throws IOException{
 		System.out.println("------------ Registration step 1 ----------");
         RestTemplate restTemplate = new RestTemplate();
@@ -35,7 +38,10 @@ public class RegistrController {
         String body = rateResponse.getBody();
         System.out.println(body);
 	}
-	
+	/**
+     * Makes the third step for registering after the email confirmation
+     * @return User
+     */
 	public static void registrStep2(User user) throws IOException{
 		System.out.println("------------ Registration step 2 ----------");
         RestTemplate restTemplate = new RestTemplate();
