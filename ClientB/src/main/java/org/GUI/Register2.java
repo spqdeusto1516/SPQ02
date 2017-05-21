@@ -17,7 +17,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
 
-import org.apache.http.client.ClientProtocolException;
 import org.controllers.RegistrController;
 import org.models.Address;
 import org.models.User;
@@ -303,8 +302,6 @@ public class Register2 extends JFrame implements ActionListener {
 				//			System.out.println(Register.newUser.getEmail());
 				try {
 					RegistrController.registrStep2(Register.newUser);
-				} catch (ClientProtocolException e1) {
-					e1.printStackTrace();
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}

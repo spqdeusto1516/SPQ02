@@ -23,7 +23,6 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
 
-import org.apache.http.client.ClientProtocolException;
 import org.controllers.LoginController;
 import org.dtos.LoginDTO;
 import org.models.*;
@@ -174,9 +173,6 @@ public class Login extends JFrame implements ActionListener {
 					try {
 						Booking b= new Booking();
 						this.dispose();
-					} catch (ClientProtocolException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
