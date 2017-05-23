@@ -11,9 +11,6 @@ import org.dtos.ReserveDTO;
 import java.io.IOException;
 import java.util.List;
 
-/**
- * Created by vitiok on 5/19/17.
- */
 public class Client {
 
     public static final String REST_SERVICE_URI = "http://localhost:8080/";

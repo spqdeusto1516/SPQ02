@@ -25,7 +25,49 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 
 
  <dependencies>
-		 <dependency>
+
+     <!-- https://mvnrepository.com/artifact/log4j/log4j -->
+     <dependency>
+         <groupId>org.apache.logging.log4j</groupId>
+         <artifactId>log4j-slf4j-impl</artifactId>
+         <version>2.5</version>
+     </dependency>
+     <dependency>
+         <groupId>org.apache.logging.log4j</groupId>
+         <artifactId>log4j-slf4j-impl</artifactId>
+         <version>2.5</version>
+     </dependency>
+
+     <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+     <dependency>
+         <groupId>org.slf4j</groupId>
+         <artifactId>slf4j-api</artifactId>
+         <version>1.8.0-alpha2</version>
+     </dependency>
+
+     <dependency>
+         <groupId>org.apache.logging.log4j</groupId>
+         <artifactId>log4j-core</artifactId>
+         <version>2.5</version>
+     </dependency>
+     <dependency>
+         <groupId>org.apache.logging.log4j</groupId>
+         <artifactId>log4j-jcl</artifactId>
+         <version>2.5</version>
+     </dependency>
+
+     <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-security</artifactId>
+         <exclusions>
+             <exclusion>
+                 <groupId>ch.qos.logback</groupId>
+                 <artifactId>logback-classic</artifactId>
+             </exclusion>
+         </exclusions>
+     </dependency>
+
+     <dependency>
 		    <groupId>net.bytebuddy</groupId>
 		    <artifactId>byte-buddy</artifactId>
 		    </dependency>
@@ -157,5 +199,45 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
         </snapshots>
     </pluginRepository>
 </pluginRepositories>
+<build>
+    <plugins>
+        <plugin>
+            <artifactId>maven-resources-plugin</artifactId>
+            <version>2.6</version>
+            <executions>
+                <execution>
+                    <id>copy-resources</id>
+                    <!-- here the phase you need -->
+                    <phase>validate</phase>
+                    <goals>
+                        <goal>copy-resources</goal>
+                    </goals>
+                    <configuration>
+                        <outputDirectory>${basedir}/docs</outputDirectory>
+                        <resources>
+                            <resource>
+                                <directory>${basedir}/doxygen/html</directory>
+                                <filtering>true</filtering>
+                            </resource>
+                        </resources>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+
+        <plugin>
+            <artifactId>maven-clean-plugin</artifactId>
+            <version>3.0.0</version>
+            <configuration>
+                <filesets>
+                    <fileset>
+                        <directory>${basedir}/docs</directory>
+                    </fileset>
+                </filesets>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
+
 </project>
 

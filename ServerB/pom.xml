@@ -25,6 +25,8 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     </properties>
 
     <dependencies>
+
+
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>

@@ -5,27 +5,22 @@ import com.deusto.integration.test.common.AbstractIT;
 import com.lordofthejars.nosqlunit.annotation.UsingDataSet;
 import com.lordofthejars.nosqlunit.core.LoadStrategyEnum;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.MvcResult;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
 public class BookControllerITest extends AbstractIT {
 
-    Logger logger = Logger.getLogger(BookControllerITest.class.getName());
-
+//    Logger logger = Logger.getLogger(BookControllerITest.class.getName());
+    final static Logger logger = LoggerFactory.getLogger(BookControllerITest.class);
     @Test
     @UsingDataSet(locations = "/json/controllers/book/actual.json", loadStrategy = LoadStrategyEnum.CLEAN_INSERT)
     @WithUserDetails(value = "usermail@mail.com")
@@ -44,7 +39,7 @@ public class BookControllerITest extends AbstractIT {
                 .andExpect(status().isOk())
                 .andReturn();
 
-        logger.log(Level.WARNING, result.getResponse().getContentAsString());
+        logger.info(result.getResponse().getContentAsString());
     }
 
     @Test
@@ -54,6 +49,6 @@ public class BookControllerITest extends AbstractIT {
         MvcResult result = mvc.perform(get("/book"))
                 .andExpect(status().isOk())
                 .andReturn();
-        logger.log(Level.WARNING, result.getResponse().getContentAsString());
+        logger.info(result.getResponse().getContentAsString());
     }
 }
