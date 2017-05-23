@@ -36,12 +36,6 @@
 		<version>2.0.0</version>
 		<scope>test</scope>
 	</dependency>
-    <dependency>
-    	<groupId>bookit</groupId>
-    	<artifactId>ServerB</artifactId>
-    	<type>war</type>
-    	<version>0.0.1-SNAPSHOT</version>
-    </dependency>
         <dependency>
             <groupId>com.lordofthejars</groupId>
             <artifactId>nosqlunit-mongodb</artifactId>
