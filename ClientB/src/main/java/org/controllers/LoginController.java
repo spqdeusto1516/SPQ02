@@ -13,7 +13,11 @@ import java.util.Arrays;
 public class LoginController {
 
     public static final String REST_SERVICE_URI = "http://localhost:8080/";
-
+    /**
+     * Logins to the application.
+     * @param LoginDTO
+     * @return Token
+     */
     public static Token login(LoginDTO loginDTO) throws IOException {
         System.out.println("------------ Login ----------");
         RestTemplate restTemplate = new RestTemplate();
@@ -24,7 +28,6 @@ public class LoginController {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         headers.setContentType(MediaType.APPLICATION_JSON);
-//        headers.add("X_AUTH_TOKEN", "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkaWFuYS5hcnRpb21Ab3BlbmRldXN0by5lcyIsImNyZWF0ZWQiOjE0OTUyMzEzMzEzNTEsImV4cCI6MTU4MTYzMTMzMX0.EjBpAiMc2X2kmmdPNU97aDSbbpojAIQvmPR2RoiAP9afpKihSmEi5_k4fgryC5N10NSVbCUaWYAcaAgmKIkY5g");
         HttpEntity<String> entity = new HttpEntity<String>(json, headers);
 
         ResponseEntity<Token> rateResponse =

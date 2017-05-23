@@ -31,20 +31,11 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-    	<groupId>bookit</groupId>
-    	<artifactId>ServerB</artifactId>
-    	<type>war</type>
-    	<version>0.0.1-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-     <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-test</artifactId>
-            <scope>test</scope>
-        </dependency>
+		<groupId>org.databene</groupId>
+		<artifactId>contiperf</artifactId>
+		<version>2.0.0</version>
+		<scope>test</scope>
+	</dependency>
         <dependency>
             <groupId>com.lordofthejars</groupId>
             <artifactId>nosqlunit-mongodb</artifactId>
@@ -56,21 +47,46 @@
             <scope>test</scope>
         </dependency>
   </dependencies>
-  
-<!-- 	<profiles> -->
-<!-- 		<profile>   -->
-<!-- 			<id>clientB</id> -->
-<!-- 			 <build> -->
-<!--         		<plugins> -->
-<!--             		<plugin> -->
-<!--                 		<groupId>org.springframework.boot</groupId> -->
-<!--                 		<artifactId>spring-boot-maven-plugin</artifactId> -->
-<!--                 		<configuration> -->
-<!-- 							<mainClass>org.ClientP.App</mainClass> -->
-<!-- 						</configuration> -->
-<!--             		</plugin> -->
-<!--         		</plugins> -->
-<!--     		</build>   -->
-<!-- 		</profile> -->
-<!-- 	</profiles> -->
+  <reporting>
+  <plugins>
+	<!-- Normally, we take off the dependency report, saves time. -->
+	<plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-project-info-reports-plugin</artifactId>
+		<version>2.7</version>
+		<configuration>
+			<dependencyLocationsEnabled>false</dependencyLocationsEnabled>
+		</configuration>
+	</plugin>
+	<plugin>
+		<groupId>org.codehaus.mojo</groupId>
+		<artifactId>cobertura-maven-plugin</artifactId>
+		<version>2.6</version>
+		<configuration>
+			<formats>
+				<format>html</format>
+				<format>xml</format>
+			</formats>
+		</configuration>
+	</plugin>
+
+   </plugins>
+</reporting>
+	<profiles>
+		<profile>  
+			<id>clientB</id>
+			 <build>
+        		<plugins>
+            		<plugin>
+                		<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<version>1.6.0</version>
+                		<configuration>
+							<mainClass>org.GUI.Login</mainClass>
+						</configuration>
+            		</plugin>
+        		</plugins>
+    		</build>  
+		</profile>
+	</profiles>
 </project>

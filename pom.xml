@@ -77,10 +77,6 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
   			<version>1.10.2</version>
 		</dependency>
   		<dependency>
-    		<groupId>org.apache.httpcomponents</groupId>
-    		<artifactId>httpclient</artifactId>
-		</dependency>
-  		<dependency>
 		    <groupId>io.github.hzpz.spring.boot</groupId>
 		    <artifactId>mongeez-spring-boot-starter</artifactId>
 		    <version>${spring-boot-mongeez.version}</version>
@@ -150,6 +146,12 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
     		<groupId>org.springframework</groupId>
     		<artifactId>spring-tx</artifactId>
     	</dependency>
+    	<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.12</version>
+			<scope>compile</scope>
+		</dependency>
   	</dependencies>
   <parent>
   	<groupId>org.springframework.boot</groupId>

@@ -52,6 +52,16 @@ public class BookController {
     public HttpEntity<?> createBook(@RequestBody BookDTO bookDTO) {
         return new ResponseEntity(bookService.insert(BookBuilder.get(bookDTO)), HttpStatus.OK);
     }
+    
+    /**
+     * Creates a new book
+     * @param Book book
+     */
+    @PostMapping(path = "/update",consumes = MediaType.APPLICATION_JSON_VALUE)
+    public HttpEntity<?> updateBook(@RequestBody Book book) {
+        return new ResponseEntity(bookService.update(book), HttpStatus.OK);
+    }
+
 
     /**
      * Get book by id

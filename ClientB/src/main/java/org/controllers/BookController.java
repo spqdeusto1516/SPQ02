@@ -19,7 +19,10 @@ import java.util.List;
 public class BookController {
 
     public static final String REST_SERVICE_URI = "http://localhost:8080/";
-
+    /**
+     * Retreives all the books.
+     * @return List<Book>
+     */
     public static List<Book> getAllBooks() {
         System.out.println("------------Get all books----------");
         RestTemplate restTemplate = new RestTemplate();
@@ -30,7 +33,11 @@ public class BookController {
         List<Book> books = rateResponse.getBody();
 		return books;
     }
-    
+    /**
+     * Retreives all the books filtered by some parameters.
+     * @param FilterDTO
+     * @return List<Book>
+     */
     public static List<Book> getBooksFilter(FilterDTO filter) throws IOException {
         System.out.println("------------Get books by filter----------");
         RestTemplate restTemplate = new RestTemplate();
@@ -48,5 +55,28 @@ public class BookController {
                         });
         List<Book> books = rateResponse.getBody();
 		return books;
+    }
+    /**
+     * Updates a book from the db.
+     * @param Book
+     */
+    public static void updateBook(Book book) throws IOException{
+    	 System.out.println("------------ Update book ----------");
+         RestTemplate restTemplate = new RestTemplate();
+         
+         ObjectMapper mapper = new ObjectMapper();
+         String json = mapper.writeValueAsString(book);
+         
+         HttpHeaders headers = new HttpHeaders();
+         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+         headers.setContentType(MediaType.APPLICATION_JSON);
+         
+         HttpEntity<String> entity = new HttpEntity<String>(json, headers);
+         ResponseEntity<String> rateResponse =
+                 restTemplate.exchange(REST_SERVICE_URI + "/book/update",
+                         HttpMethod.POST, entity, new ParameterizedTypeReference<String>() {
+                         });
+         String body = rateResponse.getBody();
+         System.out.println(body);
     }
 }

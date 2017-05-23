@@ -14,7 +14,10 @@ import java.util.Arrays;
 public class ReserveController {
 
     public static final String REST_SERVICE_URI = "http://localhost:8080/";
-
+    /**
+     * Creates a reservation of a book made by an user
+     * @params ReserveDTO, Token 
+     */
     public static void create(ReserveDTO reserveDTO, Token token) throws IOException {
         System.out.println("------------ Reserve ----------");
         RestTemplate restTemplate = new RestTemplate();
@@ -34,5 +37,9 @@ public class ReserveController {
                         });
 
         Reserve body = rateResponse.getBody();
+        System.out.println(body.getBook().getCount());
+        BookController.updateBook(body.getBook());
     }
+    
+    
 }
