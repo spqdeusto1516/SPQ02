@@ -48,6 +48,7 @@ public class RegistrControllerTest {
 		address.setPostalCode("123");
 		address.setApartamentNumber(1);
 		User user = new User();
+		user.setCountryCode("34");
 		user.setPassword("1234");
 		user.setEmail("ander.areizagab@opendeusto.es");
 		user.setBirthDate(1234123);
