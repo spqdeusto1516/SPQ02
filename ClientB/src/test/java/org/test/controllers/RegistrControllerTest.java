@@ -20,6 +20,7 @@ public class RegistrControllerTest {
 	public ContiPerfRule i = new ContiPerfRule();	
 	@Test
 	@PerfTest(invocations = 5)
+	@Required(max = 200000, average = 200000)
 	public void registreStep1test() throws IOException{
 		RegistrDTO registr = new RegistrDTO();
 		registr.setFirstname("test");
