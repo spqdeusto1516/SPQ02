@@ -194,7 +194,7 @@ public class Register2 extends JFrame implements ActionListener {
 		street = new JTextField();
 		street.setForeground(Color.BLACK);
 		street.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		street.setBounds(460, 290, 69, 31);
+		street.setBounds(435, 290, 115, 31);
 		background.add(street);
 		
 		JLabel lblHouseNumber = new JLabel("House number");

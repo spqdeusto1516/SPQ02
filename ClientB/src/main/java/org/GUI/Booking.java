@@ -164,7 +164,7 @@ public class Booking extends JFrame implements ActionListener {
 		background.add(lblBy);
 		
 		filtered = new JComboBox();
-		filtered.setModel(new DefaultComboBoxModel(new String[] {"Title", "Author Name","Author Surname", "Genre", "Ranking"}));
+		filtered.setModel(new DefaultComboBoxModel(new String[] {"Title", "Author Name","Author Surname", "Genre"}));
 		filtered.setBounds(743, 80, 174, 40);
 		background.add(filtered);
 		
